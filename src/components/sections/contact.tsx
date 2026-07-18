@@ -1,6 +1,7 @@
-import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
+import { StartProjectButton } from "@/components/start-project";
 import { SectionLabel } from "@/components/section-label";
 
 export function Contact() {
@@ -29,12 +30,7 @@ export function Contact() {
 
         <Reveal delay={0.3}>
           <div className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild variant="solid" size="lg" className="group">
-              <a href="mailto:hello@variablesolutions.mv">
-                Start a project
-                <ArrowRight size={18} className="transition-transform duration-500 group-hover:translate-x-1" />
-              </a>
-            </Button>
+            <StartProjectButton variant="solid" size="lg" />
             <Button asChild variant="outline" size="lg">
               <a href="mailto:hello@variablesolutions.mv">Book a consultation</a>
             </Button>

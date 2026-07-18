@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { LogoMark } from "@/components/logo";
+import { StartProjectButton } from "@/components/start-project";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -87,12 +86,7 @@ export function Hero() {
           transition={{ duration: 0.9, ease, delay: 0.85 }}
           className="mt-11 flex flex-col items-center gap-4 sm:flex-row"
         >
-          <Button asChild variant="outline" size="lg">
-            <a href="#contact">
-              Start a project
-              <ArrowRight size={18} className="transition-transform duration-500 group-hover:translate-x-1" />
-            </a>
-          </Button>
+          <StartProjectButton variant="outline" size="lg" />
           <a
             href="#services"
             className="text-sm font-medium tracking-wide text-sage transition-colors duration-300 hover:text-sage-gold"

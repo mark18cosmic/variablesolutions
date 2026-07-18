@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Wordmark } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { openStartProject } from "@/components/start-project";
 import { cn } from "@/lib/utils";
 
 const links = [
   { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
   { label: "Approach", href: "#process" },
-  { label: "Proof", href: "#proof" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -53,8 +54,8 @@ export function SiteNav() {
               <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold-gradient transition-all duration-500 group-hover:w-full" />
             </a>
           ))}
-          <Button asChild variant="outline" size="sm">
-            <a href="#contact">Start a project</a>
+          <Button variant="outline" size="sm" onClick={openStartProject}>
+            Start a project
           </Button>
         </div>
 
@@ -87,10 +88,16 @@ export function SiteNav() {
                   {l.label}
                 </a>
               ))}
-              <Button asChild variant="outline" size="sm" className="mt-3 w-full">
-                <a href="#contact" onClick={() => setOpen(false)}>
-                  Start a project
-                </a>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-3 w-full"
+                onClick={() => {
+                  setOpen(false);
+                  openStartProject();
+                }}
+              >
+                Start a project
               </Button>
             </div>
           </motion.div>

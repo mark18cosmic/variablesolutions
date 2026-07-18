@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
+import { StartProjectModal } from "@/components/start-project";
 
 const serifDisplay = Fraunces({
   variable: "--font-serif-display",
@@ -42,7 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${serifDisplay.variable} ${sansGeo.variable} h-full`}>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+        {children}
+        <StartProjectModal />
+      </body>
     </html>
   );
 }
