@@ -1,46 +1,43 @@
 @import "tailwindcss";
 
 /* ============================================================
-   VARIABLE SOLUTIONS — banknote-inspired emerald & gold system
+   KMSOLUTIONS — flat, modern SaaS system
+   near-black + navy surfaces, mint accent, blue secondary
    ============================================================ */
 
 :root {
-  --background: #04120b;
-  --background-2: #0b1f16;
-  --foreground: #f2f4ef;
+  --background: #0a0a0a;
+  --background-2: #12181f;
+  --foreground: #f4f6f5;
+
+  --mint: #2ee6a8;
+  --blue: #2f8ef0;
+  --off-white: #f4f6f5;
 
   /* muted secondary text */
-  --sage: #8a9a8f;
-  --sage-gold: #eddca0;
+  --muted: #8b9490;
+  --muted-strong: #b7bdb9;
 
-  /* gold gradient stops */
-  --gold-light: #f6e27a;
-  --gold-mid: #d8b24a;
-  --gold-deep: #8a6a1a;
-
-  --hairline: rgba(214, 184, 92, 0.22);
-  --hairline-strong: rgba(214, 184, 92, 0.45);
+  --line: rgba(244, 246, 245, 0.1);
+  --line-strong: rgba(244, 246, 245, 0.2);
+  --mint-line: rgba(46, 230, 168, 0.35);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-2: var(--background-2);
   --color-foreground: var(--foreground);
-  --color-sage: var(--sage);
-  --color-sage-gold: var(--sage-gold);
-  --color-gold-light: var(--gold-light);
-  --color-gold-mid: var(--gold-mid);
-  --color-gold-deep: var(--gold-deep);
+  --color-mint: var(--mint);
+  --color-blue: var(--blue);
+  --color-off-white: var(--off-white);
+  --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
 
-  --font-sans: var(--font-sans-geo);
-  --font-serif: var(--font-serif-display);
-
-  --color-emerald-900: #04120b;
-  --color-emerald-800: #0b1f16;
+  --font-sans: var(--font-space-grotesk);
 }
 
 * {
-  border-color: var(--hairline);
+  border-color: var(--line);
 }
 
 html {
@@ -50,70 +47,40 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans-geo), system-ui, sans-serif;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-/* Gold gradient text/fill helpers */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #f6e27a 0%, #e9c766 38%, #b98f2f 72%, #8a6a1a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* faint dot-grid backdrop — flat, geometric, no gradients */
+.dot-grid {
+  background-image: radial-gradient(rgba(244, 246, 245, 0.09) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.bg-gold-gradient {
-  background: linear-gradient(135deg, #f6e27a 0%, #d8b24a 45%, #8a6a1a 100%);
+.dot-grid-mint {
+  background-image: radial-gradient(rgba(46, 230, 168, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.border-hairline {
-  border: 1px solid var(--hairline);
+.flat-hover {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
-
-/* Guilloché / currency backdrop — layered radial + conic engraving */
-.guilloche {
-  background-image:
-    repeating-radial-gradient(circle at 50% 40%, rgba(214,184,92,0.05) 0px, rgba(214,184,92,0.05) 1px, transparent 1px, transparent 14px),
-    repeating-radial-gradient(circle at 50% 40%, rgba(214,184,92,0.035) 0px, rgba(214,184,92,0.035) 1px, transparent 1px, transparent 34px),
-    repeating-conic-gradient(from 0deg at 50% 40%, rgba(214,184,92,0.04) 0deg, transparent 2deg, transparent 8deg);
-}
-
-/* fine diagonal engraving lines */
-.engrave-lines {
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(214, 184, 92, 0.04) 0px,
-    rgba(214, 184, 92, 0.04) 1px,
-    transparent 1px,
-    transparent 9px
-  );
-}
-
-/* subtle gold grain vignette */
-.hero-vignette {
-  background: radial-gradient(120% 80% at 50% 0%, rgba(11,31,22,0) 40%, rgba(4,18,11,0.9) 100%);
-}
-
-.gold-glow-hover {
-  transition: box-shadow 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
-}
-.gold-glow-hover:hover {
-  border-color: var(--hairline-strong);
-  box-shadow: 0 0 0 1px rgba(214,184,92,0.15), 0 18px 60px -30px rgba(214,184,92,0.45);
+.flat-hover:hover {
+  transform: translateY(-3px);
 }
 
 ::selection {
-  background: rgba(246, 226, 122, 0.24);
-  color: #fff;
+  background: rgba(46, 230, 168, 0.3);
+  color: #0a0a0a;
 }
 
 /* thin scrollbar */
 ::-webkit-scrollbar { width: 9px; }
-::-webkit-scrollbar-track { background: #04120b; }
-::-webkit-scrollbar-thumb { background: #22331f; border-radius: 9px; }
-::-webkit-scrollbar-thumb:hover { background: #2e4429; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #1c2530; border-radius: 9px; }
+::-webkit-scrollbar-thumb:hover { background: #263241; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

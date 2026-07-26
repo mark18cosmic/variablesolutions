@@ -34,12 +34,12 @@ export function SiteNav() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-[var(--hairline)] bg-[rgba(4,18,11,0.72)] backdrop-blur-xl"
+          ? "border-b border-[var(--line)] bg-[rgba(10,10,10,0.75)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <a href="#top" aria-label="Variable Solutions home">
+        <a href="#top" aria-label="KMSolutions home">
           <Wordmark markSize={38} />
         </a>
 
@@ -48,19 +48,19 @@ export function SiteNav() {
             <a
               key={l.href}
               href={l.href}
-              className="group relative text-sm font-medium tracking-wide text-sage transition-colors duration-300 hover:text-sage-gold"
+              className="group relative text-sm font-medium tracking-wide text-muted-strong transition-colors duration-300 hover:text-mint"
             >
               {l.label}
-              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold-gradient transition-all duration-500 group-hover:w-full" />
+              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-mint transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
-          <Button variant="outline" size="sm" onClick={openStartProject}>
+          <Button variant="solid" size="sm" onClick={openStartProject}>
             Start a project
           </Button>
         </div>
 
         <button
-          className="text-sage-gold md:hidden"
+          className="text-mint md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -75,7 +75,7 @@ export function SiteNav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-[var(--hairline)] bg-[rgba(4,18,11,0.95)] backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-t border-[var(--line)] bg-[rgba(10,10,10,0.95)] backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {links.map((l) => (
@@ -83,13 +83,13 @@ export function SiteNav() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="py-3 text-sm tracking-wide text-sage transition-colors hover:text-sage-gold"
+                  className="py-3 text-sm tracking-wide text-muted-strong transition-colors hover:text-mint"
                 >
                   {l.label}
                 </a>
               ))}
               <Button
-                variant="outline"
+                variant="solid"
                 size="sm"
                 className="mt-3 w-full"
                 onClick={() => {

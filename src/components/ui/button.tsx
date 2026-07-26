@@ -4,18 +4,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium tracking-wide transition-all duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold-mid/60 disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-mint/60 disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
   {
     variants: {
       variant: {
-        // Gold-outlined primary CTA
-        outline:
-          "border border-[rgba(214,184,92,0.55)] text-sage-gold bg-transparent hover:border-[rgba(246,226,122,0.9)] hover:text-white hover:shadow-[0_0_0_1px_rgba(214,184,92,0.25),0_20px_60px_-24px_rgba(246,226,122,0.55)] hover:bg-[rgba(214,184,92,0.06)]",
+        // Mint-filled primary CTA, dark text
         solid:
-          "bg-gold-gradient text-[#1a1206] font-semibold hover:shadow-[0_18px_50px_-18px_rgba(246,226,122,0.7)] hover:brightness-105",
+          "bg-mint text-[#0a0a0a] font-semibold hover:bg-[#4ff0bb]",
+        outline:
+          "border border-[rgba(46,230,168,0.5)] text-mint bg-transparent hover:bg-mint hover:text-[#0a0a0a] hover:border-mint",
         ghost:
-          "text-sage hover:text-sage-gold bg-transparent",
-        link: "text-sage-gold underline-offset-4 hover:underline",
+          "text-muted-strong hover:text-mint bg-transparent",
+        link: "text-mint underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-7 py-2",

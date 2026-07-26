@@ -1,25 +1,18 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { StartProjectModal } from "@/components/start-project";
 
-const serifDisplay = Fraunces({
-  variable: "--font-serif-display",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
-
-const sansGeo = Manrope({
-  variable: "--font-sans-geo",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Variable Solutions — Any problem. One solution.",
+  title: "KMSolutions — Any problem. One solution.",
   description:
-    "A full-service software house in the Maldives building HRM, POS, marketing platforms, websites, mobile apps, and bespoke custom software — under one roof.",
+    "A full-service software company in the Maldives building HR management systems, POS systems, marketing services, websites, apps, and any custom digital work your business needs.",
   keywords: [
     "software company Maldives",
     "HR management system",
@@ -27,11 +20,12 @@ export const metadata: Metadata = {
     "custom software",
     "mobile apps",
     "web development Maldives",
+    "KMSolutions",
   ],
   openGraph: {
-    title: "Variable Solutions — Any problem. One solution.",
+    title: "KMSolutions — Any problem. One solution.",
     description:
-      "Boutique software house in the Maldives. HRM, POS, marketing, websites, apps and custom software.",
+      "Full-service software company in the Maldives. HRM, POS, marketing, websites, apps and custom software — under one roof.",
     type: "website",
   },
 };
@@ -42,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${serifDisplay.variable} ${sansGeo.variable} h-full`}>
+    <html lang="en" className={`${spaceGrotesk.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <StartProjectModal />

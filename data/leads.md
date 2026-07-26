@@ -1,6 +1,7 @@
-# Project Enquiries
+# Project Enquiries (local fallback)
 
-Every "Start a project" submission from the site is appended below.
-Pull the repo to your machine and open this file to read them.
+In production, "Start a project" submissions are filed as GitHub Issues
+(see `src/app/api/start-project/route.ts` and `.env.example`). This file
+is only written to when `GITHUB_TOKEN` isn't configured, e.g. local dev.
 
 ---

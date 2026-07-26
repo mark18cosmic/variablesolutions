@@ -1,49 +1,48 @@
 import {
-  Users,
-  CreditCard,
-  Megaphone,
-  Globe,
-  Smartphone,
-  Boxes,
-  type LucideIcon,
-} from "lucide-react";
+  OverlapIcon,
+  RingIcon,
+  ArcIcon,
+  PillIcon,
+  PhonePillIcon,
+  TriCircleIcon,
+} from "@/components/service-icons";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 
 type Service = {
-  icon: LucideIcon;
+  icon: (props: { size?: number }) => React.ReactElement;
   title: string;
   copy: string;
 };
 
 const services: Service[] = [
   {
-    icon: Users,
+    icon: OverlapIcon,
     title: "HR Management",
     copy: "Payroll, attendance, leave and staff records in one calm, compliant system built for how your team actually works.",
   },
   {
-    icon: CreditCard,
+    icon: RingIcon,
     title: "POS Systems",
     copy: "Fast, reliable point-of-sale for retail, cafés and resorts — with inventory, reporting and offline resilience.",
   },
   {
-    icon: Megaphone,
-    title: "Marketing Platforms",
+    icon: ArcIcon,
+    title: "Marketing",
     copy: "Campaigns, CRM and analytics that turn attention into loyal customers, measured end to end.",
   },
   {
-    icon: Globe,
+    icon: PillIcon,
     title: "Websites",
     copy: "Personal, corporate and commerce sites — refined, fast and unmistakably yours, engineered to convert.",
   },
   {
-    icon: Smartphone,
-    title: "Mobile Apps",
+    icon: PhonePillIcon,
+    title: "Apps",
     copy: "Native-grade iOS and Android experiences that feel effortless and scale with your ambitions.",
   },
   {
-    icon: Boxes,
+    icon: TriCircleIcon,
     title: "Custom Software",
     copy: "Have a problem nothing off-the-shelf can solve? We architect bespoke software around it — precisely.",
   },
@@ -51,35 +50,31 @@ const services: Service[] = [
 
 function ServiceCard({ icon: Icon, title, copy }: Service) {
   return (
-    <div className="gold-glow-hover group relative h-full overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--background-2)] p-8">
-      {/* corner engraving accent */}
-      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full border border-[rgba(214,184,92,0.10)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-
-      <div className="mb-7 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[var(--hairline)] text-sage-gold transition-colors duration-500 group-hover:border-[var(--hairline-strong)]">
-        <Icon size={22} strokeWidth={1.4} />
+    <div className="flat-hover group relative h-full overflow-hidden rounded-2xl border border-[var(--line)] bg-background-2 p-8">
+      <div className="mb-7 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-background text-mint">
+        <Icon size={22} />
       </div>
 
-      <h3 className="mb-3 font-serif text-xl font-semibold tracking-tight text-foreground">
+      <h3 className="mb-3 text-xl font-bold tracking-tight text-foreground">
         {title}
       </h3>
-      <p className="text-sm leading-relaxed text-sage">{copy}</p>
+      <p className="text-sm leading-relaxed text-muted">{copy}</p>
     </div>
   );
 }
 
 export function Services() {
   return (
-    <section id="services" className="relative border-t border-[var(--hairline)] py-28 lg:py-36">
+    <section id="services" className="relative border-t border-[var(--line)] py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="max-w-2xl">
           <SectionLabel>What we build</SectionLabel>
-          <h2 className="mt-6 font-serif text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-            One studio for every digital need.
+          <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+            One company for every digital need.
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-sage">
-            Whatever the challenge, we bring the strategy, design and engineering
-            to solve it — the way a private bank handles wealth: quietly,
-            precisely, and entirely on your terms.
+          <p className="mt-5 text-base leading-relaxed text-muted">
+            Whatever the challenge, we bring the strategy, design and
+            engineering to solve it — any problem, one solution.
           </p>
         </Reveal>
 

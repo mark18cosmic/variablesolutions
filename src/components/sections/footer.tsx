@@ -1,42 +1,32 @@
-import { LogoMark } from "@/components/logo";
+import { Wordmark } from "@/components/logo";
 
 const columns = [
   {
     title: "Build",
-    links: ["HR Management", "POS Systems", "Marketing", "Websites", "Mobile Apps", "Custom Software"],
+    links: ["HR Management", "POS Systems", "Marketing", "Websites", "Apps", "Custom Software"],
   },
   {
-    title: "Studio",
+    title: "Company",
     links: ["Our approach", "Work", "Careers", "Contact"],
   },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[var(--hairline)] bg-[var(--background)]">
+    <footer className="relative border-t border-[var(--line)] bg-background">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <LogoMark size={40} />
-              <div className="flex flex-col leading-none">
-                <span className="font-serif text-sm font-semibold tracking-[0.28em] text-foreground">
-                  VARIABLE
-                </span>
-                <span className="mt-1 text-[0.6rem] font-medium tracking-[0.42em] text-sage-gold/80">
-                  SOLUTIONS
-                </span>
-              </div>
-            </div>
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-sage">
-              A boutique software house in the Maldives, building anything
-              digital — precisely, quietly, and entirely on your terms.
+            <Wordmark markSize={40} tagline />
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-muted">
+              A full-service software company in the Maldives, building
+              anything digital your business needs — under one roof.
             </p>
           </div>
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-sage-gold/80">
+              <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-mint">
                 {col.title}
               </h4>
               <ul className="mt-5 space-y-3">
@@ -44,7 +34,7 @@ export function Footer() {
                   <li key={l}>
                     <a
                       href="#contact"
-                      className="text-sm text-sage transition-colors duration-300 hover:text-sage-gold"
+                      className="text-sm text-muted transition-colors duration-300 hover:text-mint"
                     >
                       {l}
                     </a>
@@ -55,11 +45,10 @@ export function Footer() {
           ))}
         </div>
 
-        {/* gold hairline divider */}
-        <div className="mt-14 h-px w-full bg-gradient-to-r from-transparent via-[rgba(214,184,92,0.28)] to-transparent" />
+        <div className="mt-14 h-px w-full bg-[var(--line)]" />
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-sage/70 sm:flex-row">
-          <p>© {new Date().getFullYear()} Variable Solutions. All rights reserved.</p>
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-muted/70 sm:flex-row">
+          <p>© {new Date().getFullYear()} KMSolutions. All rights reserved.</p>
           <p className="tracking-wide">Malé · Republic of Maldives</p>
         </div>
       </div>
