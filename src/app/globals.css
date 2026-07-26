@@ -1,37 +1,92 @@
 @import "tailwindcss";
 
 /* ============================================================
-   KMSOLUTIONS — flat, modern SaaS system
-   near-black + navy surfaces, mint accent, blue secondary
+   KMSOLUTIONS — clean, modern, approachable SaaS system
+
+   Dark is the brand default; light mode is an opt-in toggle.
+   Surfaces are soft charcoal/navy rather than pure black, so the
+   palette reads professional rather than neon-on-void.
+
+   Mint (#2EE6A8) is the brand fill and stays constant across
+   themes. `--mint-ink` is the readable text/label variant — it
+   darkens in light mode, where mint on white would fail contrast.
    ============================================================ */
 
 :root {
-  --background: #0a0a0a;
-  --background-2: #12181f;
-  --foreground: #f4f6f5;
+  --background: #0d1114;
+  --background-2: #151c23;
+  --background-3: #1b232b;
+  --foreground: #f2f5f4;
 
   --mint: #2ee6a8;
+  --mint-ink: #45ecb5;
   --blue: #2f8ef0;
   --off-white: #f4f6f5;
 
   /* muted secondary text */
-  --muted: #8b9490;
-  --muted-strong: #b7bdb9;
+  --muted: #98a29d;
+  --muted-strong: #c5ccc8;
 
-  --line: rgba(244, 246, 245, 0.1);
-  --line-strong: rgba(244, 246, 245, 0.2);
-  --mint-line: rgba(46, 230, 168, 0.35);
+  --line: rgba(242, 245, 244, 0.09);
+  --line-strong: rgba(242, 245, 244, 0.18);
+
+  /* themed surfaces */
+  --nav-bg: rgba(13, 17, 20, 0.8);
+  --overlay: rgba(8, 11, 13, 0.72);
+
+  --card-shadow: none;
+
+  /* inverted block used in the proof grid */
+  --contrast-surface: #f4f6f5;
+  --contrast-ink: #0d1114;
+
+  --scroll-track: #0d1114;
+  --scroll-thumb: #232c35;
+  --scroll-thumb-hover: #2e3944;
+}
+
+:root[data-theme="light"] {
+  --background: #f6f8f7;
+  --background-2: #ffffff;
+  --background-3: #eef1f0;
+  --foreground: #131a20;
+
+  --mint: #2ee6a8;
+  --mint-ink: #0a8560;
+  --blue: #1d74d1;
+
+  --muted: #626d68;
+  --muted-strong: #3a443f;
+
+  --line: rgba(19, 26, 32, 0.1);
+  --line-strong: rgba(19, 26, 32, 0.2);
+
+  --nav-bg: rgba(246, 248, 247, 0.85);
+  --overlay: rgba(19, 26, 32, 0.4);
+
+  --card-shadow: 0 1px 2px rgba(19, 26, 32, 0.04), 0 8px 24px -12px rgba(19, 26, 32, 0.1);
+
+  --contrast-surface: #151c23;
+  --contrast-ink: #f4f6f5;
+
+  --scroll-track: #eaedec;
+  --scroll-thumb: #c6ccc9;
+  --scroll-thumb-hover: #aab2ae;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-2: var(--background-2);
+  --color-background-3: var(--background-3);
   --color-foreground: var(--foreground);
   --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
   --color-blue: var(--blue);
   --color-off-white: var(--off-white);
   --color-muted: var(--muted);
   --color-muted-strong: var(--muted-strong);
+  --color-contrast-surface: var(--contrast-surface);
+  --color-contrast-ink: var(--contrast-ink);
 
   --font-sans: var(--font-space-grotesk);
 }
@@ -51,37 +106,73 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* faint dot-grid backdrop — flat, geometric, no gradients */
-.dot-grid {
-  background-image: radial-gradient(rgba(244, 246, 245, 0.09) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.dot-grid-mint {
-  background-image: radial-gradient(rgba(46, 230, 168, 0.14) 1px, transparent 1px);
-  background-size: 28px 28px;
+/* soft elevation for cards — subtle in dark, gentle in light */
+.card-soft {
+  box-shadow: var(--card-shadow);
 }
 
 .flat-hover {
-  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+    transform 0.4s ease, box-shadow 0.4s ease;
 }
 .flat-hover:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+}
+
+/* theme toggle — the visible icon follows [data-theme], no JS state */
+.theme-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+:root[data-theme="dark"] .theme-icon-moon,
+:root[data-theme="light"] .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(60deg) scale(0.55);
+}
+:root[data-theme="dark"] .theme-icon-sun,
+:root[data-theme="light"] .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* carousel track — snap horizontally, hide the scrollbar chrome */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 ::selection {
-  background: rgba(46, 230, 168, 0.3);
-  color: #0a0a0a;
+  background: rgba(46, 230, 168, 0.28);
+  color: var(--foreground);
 }
 
 /* thin scrollbar */
-::-webkit-scrollbar { width: 9px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #1c2530; border-radius: 9px; }
-::-webkit-scrollbar-thumb:hover { background: #263241; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
+
+/* Full-screen sections snap gently on desktop, where a section
+   comfortably fits the viewport. Left off on small screens and for
+   reduced-motion users, where mandatory snapping fights the user. */
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  main > section {
+    scroll-snap-align: start;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html { scroll-behavior: auto; scroll-snap-type: none; }
 }

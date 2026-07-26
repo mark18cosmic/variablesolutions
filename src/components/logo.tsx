@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * KMSolutions mark — three overlapping mint circles at varying opacity,
- * set inside a dark rounded-square badge.
+ * set inside a dark rounded-square badge. The badge stays dark in both
+ * themes so the mark keeps its identity.
  */
 export function LogoMark({
   className,
@@ -22,8 +23,8 @@ export function LogoMark({
       aria-label="KMSolutions"
       role="img"
     >
-      <rect x="4" y="4" width="92" height="92" rx="22" fill="#12181F" />
-      <circle cx="50" cy="37" r="21" fill="#2EE6A8" opacity="1" />
+      <rect x="4" y="4" width="92" height="92" rx="24" fill="#151c23" />
+      <circle cx="50" cy="37" r="21" fill="#2EE6A8" />
       <circle cx="39" cy="61" r="21" fill="#2EE6A8" opacity="0.55" />
       <circle cx="61" cy="61" r="21" fill="#2EE6A8" opacity="0.8" />
     </svg>
@@ -40,15 +41,15 @@ export function Wordmark({
   tagline?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark size={markSize} />
       <span className="flex flex-col leading-none">
-        <span className="text-lg font-bold tracking-tight text-foreground">
+        <span className="text-base font-bold tracking-tight text-foreground sm:text-lg">
           KMSolutions
         </span>
         {tagline && (
-          <span className="mt-1.5 text-[0.6rem] font-medium tracking-[0.28em] text-mint">
-            ANY PROBLEM. ONE SOLUTION.
+          <span className="mt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-mint-ink">
+            Any problem. One solution.
           </span>
         )}
       </span>

@@ -1,13 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useInView,
-  animate,
-  useReducedMotion,
-} from "motion/react";
+import { motion, useInView, animate, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
+import { SectionLabel } from "@/components/section-label";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -31,7 +27,7 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
   useEffect(() => {
     if (!inView) return;
     const controls = animate(0, to, {
-      duration: reduce ? 0 : 1.4,
+      duration: reduce ? 0 : 1.3,
       ease,
       onUpdate: (v) => setVal(Math.round(v)),
     });
@@ -46,22 +42,22 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
   );
 }
 
-/* decorative corner accents — flat line art, no gradients */
+/* soft decorative corner accents — thin line art, low contrast */
 
 function WavyCorner({ stroke }: { stroke: string }) {
   return (
     <svg
-      className="pointer-events-none absolute -right-4 -top-4 h-28 w-28 opacity-70"
+      className="pointer-events-none absolute -right-3 -top-3 h-24 w-24 opacity-60"
       viewBox="0 0 100 100"
       fill="none"
       aria-hidden
     >
-      {[20, 34, 48, 62].map((y) => (
+      {[22, 36, 50].map((y) => (
         <path
           key={y}
-          d={`M0 ${y} Q 15 ${y - 12}, 30 ${y} T 60 ${y} T 90 ${y}`}
+          d={`M0 ${y} Q 15 ${y - 11}, 30 ${y} T 60 ${y} T 90 ${y}`}
           stroke={stroke}
-          strokeWidth="1.4"
+          strokeWidth="1.2"
         />
       ))}
     </svg>
@@ -71,14 +67,14 @@ function WavyCorner({ stroke }: { stroke: string }) {
 function ArcCorner({ stroke }: { stroke: string }) {
   return (
     <svg
-      className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 opacity-70"
+      className="pointer-events-none absolute -bottom-6 -right-6 h-28 w-28 opacity-60"
       viewBox="0 0 100 100"
       fill="none"
       aria-hidden
     >
-      <circle cx="100" cy="100" r="30" stroke={stroke} strokeWidth="1.4" />
-      <circle cx="100" cy="100" r="48" stroke={stroke} strokeWidth="1.4" />
-      <circle cx="100" cy="100" r="66" stroke={stroke} strokeWidth="1.4" />
+      <circle cx="100" cy="100" r="32" stroke={stroke} strokeWidth="1.2" />
+      <circle cx="100" cy="100" r="52" stroke={stroke} strokeWidth="1.2" />
+      <circle cx="100" cy="100" r="72" stroke={stroke} strokeWidth="1.2" />
     </svg>
   );
 }
@@ -86,15 +82,15 @@ function ArcCorner({ stroke }: { stroke: string }) {
 function SwirlCorner({ stroke }: { stroke: string }) {
   return (
     <svg
-      className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 opacity-70"
+      className="pointer-events-none absolute -right-4 -top-4 h-24 w-24 opacity-60"
       viewBox="0 0 100 100"
       fill="none"
       aria-hidden
     >
       <path
-        d="M50 50 C 50 30, 75 30, 75 50 C 75 75, 40 75, 40 45 C 40 15, 85 15, 85 50"
+        d="M50 50 C 50 32, 74 32, 74 50 C 74 73, 41 73, 41 46 C 41 18, 84 18, 84 50"
         stroke={stroke}
-        strokeWidth="1.6"
+        strokeWidth="1.4"
       />
     </svg>
   );
@@ -105,7 +101,7 @@ type Block = {
   value: number;
   suffix: string;
   headline?: string;
-  bg: string;
+  surface: string;
   fg: string;
   muted: string;
   accent: React.ReactNode;
@@ -116,47 +112,47 @@ const blocks: Block[] = [
     label: "Built in-house",
     value: 100,
     suffix: "%",
-    bg: "bg-background-2",
+    surface: "bg-background-2 border border-[var(--line)]",
     fg: "text-foreground",
     muted: "text-muted",
-    accent: <WavyCorner stroke="rgba(46,230,168,0.5)" />,
+    accent: <WavyCorner stroke="rgba(46,230,168,0.4)" />,
   },
   {
     label: "Off-the-shelf templates",
     value: 0,
     suffix: "",
-    bg: "bg-mint",
-    fg: "text-[#0a0a0a]",
-    muted: "text-[#0a0a0a]/60",
-    accent: <SwirlCorner stroke="rgba(10,10,10,0.35)" />,
+    surface: "bg-mint",
+    fg: "text-[#0b1310]",
+    muted: "text-[#0b1310]/65",
+    accent: <SwirlCorner stroke="rgba(11,19,16,0.3)" />,
   },
   {
-    label: "Company, every layer",
+    label: "Team, every layer",
     value: 1,
     suffix: "",
-    bg: "bg-blue",
+    surface: "bg-blue",
     fg: "text-white",
-    muted: "text-white/70",
-    accent: <ArcCorner stroke="rgba(255,255,255,0.4)" />,
+    muted: "text-white/75",
+    accent: <ArcCorner stroke="rgba(255,255,255,0.38)" />,
   },
   {
     label: "Care after launch",
     value: 24,
     suffix: "/7",
-    bg: "bg-background",
+    surface: "bg-background-3 border border-[var(--line)]",
     fg: "text-foreground",
     muted: "text-muted",
-    accent: <WavyCorner stroke="rgba(47,142,240,0.5)" />,
+    accent: <WavyCorner stroke="rgba(47,142,240,0.4)" />,
   },
   {
     label: "Maldives-based, working globally",
     value: 0,
     suffix: "",
     headline: "Global reach",
-    bg: "bg-off-white",
-    fg: "text-[#0a0a0a]",
-    muted: "text-[#0a0a0a]/60",
-    accent: <ArcCorner stroke="rgba(46,230,168,0.6)" />,
+    surface: "bg-contrast-surface",
+    fg: "text-contrast-ink",
+    muted: "text-contrast-ink/65",
+    accent: <ArcCorner stroke="rgba(46,230,168,0.5)" />,
   },
 ];
 
@@ -164,56 +160,67 @@ export function Studio() {
   return (
     <section
       id="studio"
-      className="relative overflow-hidden border-t border-[var(--line)] py-24"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden border-t border-[var(--line)] py-24"
     >
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-10">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <SectionLabel className="justify-center">Why us</SectionLabel>
+          <h2 className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            Small enough to care, built to deliver.
+          </h2>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {blocks.map((b, i) => (
             <motion.div
               key={b.label}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, ease, delay: i * 0.08 }}
-              className={`relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-2xl p-7 ${b.bg}`}
+              transition={{ duration: 0.65, ease, delay: i * 0.07 }}
+              className={`card-soft relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-2xl p-6 ${b.surface}`}
             >
               {b.accent}
               <span
-                className={`relative text-[0.68rem] font-semibold uppercase tracking-[0.24em] ${b.muted}`}
+                className={`relative text-xs font-semibold uppercase tracking-[0.1em] ${b.muted}`}
               >
                 {b.label}
               </span>
-              <div className={`relative text-4xl font-bold tracking-tight sm:text-5xl ${b.fg}`}>
+              <div
+                className={`relative text-3xl font-bold tracking-tight sm:text-4xl ${b.fg}`}
+              >
                 {b.headline ?? <Counter to={b.value} suffix={b.suffix} />}
               </div>
             </motion.div>
           ))}
         </div>
+      </div>
 
-        <Reveal delay={0.15} className="mt-16">
-          <p className="text-center text-[0.7rem] font-medium uppercase tracking-[0.4em] text-muted/70">
+      {/* everything-under-one-roof marquee */}
+      <div className="mt-14">
+        <Reveal>
+          <p className="text-center text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted/80">
             Everything under one roof
           </p>
         </Reveal>
-      </div>
 
-      {/* infinite marquee */}
-      <div className="relative mt-10 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <motion.div
-          className="flex shrink-0 items-center gap-10 pr-10"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
-        >
-          {[...marquee, ...marquee].map((m, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-10 whitespace-nowrap text-2xl font-bold tracking-tight text-muted/40 sm:text-3xl"
-            >
-              {m}
-              <span className="text-mint/40">●</span>
-            </span>
-          ))}
-        </motion.div>
+        <div className="relative mt-6 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+          <motion.div
+            className="flex shrink-0 items-center gap-8 pr-8"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
+          >
+            {[...marquee, ...marquee].map((m, i) => (
+              <span
+                key={i}
+                className="flex items-center gap-8 whitespace-nowrap text-xl font-bold tracking-tight text-muted/55 sm:text-2xl"
+              >
+                {m}
+                <span className="h-1.5 w-1.5 rounded-full bg-mint/40" />
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 22,
+  y = 18,
   as = "div",
 }: {
   children: React.ReactNode;
@@ -26,8 +26,8 @@ export function Reveal({
       className={cn(className)}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.85, ease, delay }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{ duration: 0.7, ease, delay }}
     >
       {children}
     </MotionTag>
@@ -36,12 +36,12 @@ export function Reveal({
 
 const containerVariants: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
 };
 
 export function Stagger({

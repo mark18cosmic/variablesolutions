@@ -7,6 +7,7 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     "mobile apps",
     "web development Maldives",
     "KMSolutions",
+    "Roster HRM",
   ],
   openGraph: {
     title: "KMSolutions — Any problem. One solution.",
@@ -30,13 +32,24 @@ export const metadata: Metadata = {
   },
 };
 
+/** Applies the saved theme before first paint so there's no flash. */
+const themeScript = `!function(){try{var t=localStorage.getItem("kms-theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}}()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} h-full`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      className={`${spaceGrotesk.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <StartProjectModal />

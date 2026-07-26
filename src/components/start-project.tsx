@@ -112,7 +112,7 @@ export function StartProjectModal() {
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="absolute inset-0 bg-[rgba(10,10,10,0.75)] backdrop-blur-md"
+            className="absolute inset-0 bg-[var(--overlay)] backdrop-blur-md"
             onClick={() => setOpen(false)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -122,21 +122,16 @@ export function StartProjectModal() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="relative w-full max-w-lg overflow-hidden rounded-t-3xl border border-[var(--line)] bg-background-2 sm:rounded-3xl"
+            className="card-soft relative w-full max-w-lg overflow-hidden rounded-t-3xl border border-[var(--line)] bg-background-2 sm:rounded-3xl"
             initial={{ y: 60, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 40, opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.5, ease }}
           >
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-mint/50"
-              aria-hidden
-            />
-
             <button
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-muted transition-colors hover:border-mint/50 hover:text-mint"
+              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-muted transition-colors hover:border-mint/40 hover:text-mint-ink"
             >
               <X size={16} />
             </button>
@@ -154,7 +149,7 @@ export function StartProjectModal() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 200, damping: 14 }}
-                      className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-mint text-[#0a0a0a]"
+                      className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-mint text-[#0b1310]"
                     >
                       <Check size={28} />
                     </motion.div>
@@ -181,7 +176,7 @@ export function StartProjectModal() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.36em] text-mint">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-mint-ink">
                       Start a project
                     </p>
                     <h3 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
@@ -209,7 +204,7 @@ export function StartProjectModal() {
                       />
 
                       <div>
-                        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted">
+                        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted">
                           Budget
                         </label>
                         <div className="flex flex-wrap gap-2">
@@ -219,10 +214,10 @@ export function StartProjectModal() {
                               key={b}
                               onClick={() => setBudget(b)}
                               className={cn(
-                                "rounded-full border px-3.5 py-1.5 text-xs tracking-wide transition-colors duration-300",
+                                "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors duration-300",
                                 budget === b
-                                  ? "border-mint bg-mint/10 text-mint"
-                                  : "border-[var(--line)] text-muted hover:text-mint"
+                                  ? "border-mint bg-mint/10 text-mint-ink"
+                                  : "border-[var(--line)] text-muted hover:text-mint-ink"
                               )}
                             >
                               {b}
@@ -234,7 +229,7 @@ export function StartProjectModal() {
                       <div>
                         <label
                           htmlFor="idea"
-                          className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted"
+                          className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted"
                         >
                           The idea
                         </label>
@@ -244,12 +239,12 @@ export function StartProjectModal() {
                           required
                           rows={4}
                           placeholder="What are you trying to build or solve?"
-                          className="w-full resize-none rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint/50"
+                          className="w-full resize-none rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint"
                         />
                       </div>
 
                       {status === "error" && (
-                        <p className="text-sm text-red-300/90">{error}</p>
+                        <p className="text-sm text-red-400">{error}</p>
                       )}
 
                       <Button
@@ -295,7 +290,7 @@ function Field({
     <div>
       <label
         htmlFor={name}
-        className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted"
+        className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted"
       >
         {label}
       </label>
@@ -303,7 +298,7 @@ function Field({
         id={name}
         name={name}
         {...props}
-        className="w-full rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint/50"
+        className="w-full rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint"
       />
     </div>
   );
