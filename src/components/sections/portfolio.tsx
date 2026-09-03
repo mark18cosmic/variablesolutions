@@ -6,6 +6,8 @@ import { ArrowUpRight, Sparkles, Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { openStartProject } from "@/components/start-project";
+import { Tilt } from "@/components/tilt";
+import { Aurora, wash } from "@/components/aurora";
 import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -80,10 +82,15 @@ function Card({
       whileHover={{ y: -6 }}
       transition={{ duration: 0.4, ease }}
       className={cn(
-        "card-soft group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--line)] bg-background-2 transition-colors duration-500 hover:border-mint/30",
+        "card-soft surface gradient-ring group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--line)] bg-background-2 transition-colors duration-500 hover:border-mint/30",
         className
       )}
     >
+      {/* light sweeping across the card on hover */}
+      <span
+        className="pointer-events-none absolute -inset-x-8 -top-1/2 z-20 h-[200%] -translate-x-full -rotate-12 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
+        aria-hidden
+      />
       {children}
     </motion.div>
   );
@@ -127,7 +134,8 @@ function SmallCard({
       className="h-full"
     >
       <ProjectShell project={project} className="block h-full">
-        <Card>
+        <Tilt className="rounded-3xl" intensity={6}>
+          <Card>
           <div className="relative aspect-[16/10] w-full overflow-hidden bg-background">
             <Image
               src={project.image}
@@ -168,7 +176,8 @@ function SmallCard({
               )}
             </div>
           </div>
-        </Card>
+          </Card>
+        </Tilt>
       </ProjectShell>
     </motion.div>
   );
@@ -181,14 +190,21 @@ export function Portfolio() {
       aria-labelledby="work-heading"
       className="relative flex min-h-screen items-center overflow-hidden border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
+      <Aurora
+        blobs={[
+          { className: "-left-[10%] top-[8%] h-[32rem] w-[32rem]", color: wash("mint", 0.38) },
+          { className: "-right-[14%] bottom-[8%] h-[34rem] w-[34rem]", color: wash("blue", 0.4), delay: "-8s" },
+        ]}
+      />
+
       <div className="relative mx-auto w-full max-w-7xl">
-        <Reveal className="max-w-2xl">
+        <Reveal className="max-w-3xl">
           <SectionLabel>Selected work</SectionLabel>
           <h2
             id="work-heading"
             className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
-            A young company, <span className="text-mint-ink">big ambitions.</span>
+            A young company, <span className="text-gradient">big ambitions.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
             We&apos;re just getting started — and picky about what we take on.
@@ -206,7 +222,8 @@ export function Portfolio() {
             className="lg:col-span-2"
           >
             <ProjectShell project={featured} className="block h-full">
-              <Card>
+              <Tilt className="rounded-3xl" intensity={5}>
+                <Card>
                 <div className="relative aspect-[16/9] w-full overflow-hidden bg-background">
                   <Image
                     src={featured.image}
@@ -248,7 +265,8 @@ export function Portfolio() {
                     </span>
                   </div>
                 </div>
-              </Card>
+                </Card>
+              </Tilt>
             </ProjectShell>
           </motion.div>
 

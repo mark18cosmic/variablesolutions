@@ -11,7 +11,11 @@ import {
   AnimatePresence,
   type MotionValue,
 } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { StartProjectButton } from "@/components/start-project";
+import { HeroCanvas } from "@/components/three/hero-canvas";
+import { Aurora, wash } from "@/components/aurora";
+import { Magnetic } from "@/components/magnetic";
 import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -26,6 +30,14 @@ const rotating = [
 ];
 
 const clients = ["The Edge", "Mahufal", "UnifyGames", "Neut"];
+
+/** Glass chips that orbit the 3D object at different parallax depths. */
+const chips = [
+  { label: "Payroll", depth: -46, drift: 14, duration: 13, className: "left-[5%] top-[26%]" },
+  { label: "Invoicing", depth: 34, drift: -16, duration: 15, className: "right-[6%] top-[22%]" },
+  { label: "Point of sale", depth: 50, drift: 18, duration: 17, className: "bottom-[22%] right-[9%]" },
+  { label: "Mobile apps", depth: -30, drift: -14, duration: 14, className: "bottom-[26%] left-[8%]" },
+];
 
 /** Headline that reveals word by word from behind a mask. */
 function WordReveal({
@@ -55,7 +67,7 @@ function WordReveal({
   );
 }
 
-/** A soft shape that drifts slowly and shifts a little with the pointer. */
+/** A shape that drifts slowly and shifts with the pointer for depth. */
 function Floater({
   mx,
   my,
@@ -96,50 +108,6 @@ function Floater({
   );
 }
 
-/** The logo motif, enlarged and breathing gently behind the headline. */
-function BreathingMark({ reduce }: { reduce: boolean }) {
-  const circles = [
-    { color: "bg-mint", opacity: 0.9, cx: 0, cy: -80 },
-    { color: "bg-mint", opacity: 0.5, cx: -88, cy: 55 },
-    { color: "bg-blue", opacity: 0.45, cx: 88, cy: 55 },
-  ];
-
-  return (
-    <div
-      className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]"
-      aria-hidden
-    >
-      <div className="relative h-[340px] w-[340px] sm:h-[440px] sm:w-[440px]">
-        {circles.map((c, i) => (
-          <motion.div
-            key={i}
-            className={cn(
-              "absolute left-1/2 top-1/2 h-[240px] w-[240px] rounded-full sm:h-[300px] sm:w-[300px]",
-              c.color
-            )}
-            style={{ opacity: c.opacity }}
-            animate={
-              reduce
-                ? { x: c.cx - 120, y: c.cy - 120 }
-                : {
-                    x: [c.cx - 120, c.cx - 120 + (i === 1 ? -22 : 22), c.cx - 120],
-                    y: [c.cy - 120, c.cy - 120 + (i === 0 ? -20 : 20), c.cy - 120],
-                    scale: [1, 1.05, 1],
-                  }
-            }
-            transition={{
-              duration: 16,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 1.1,
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = !!useReducedMotion();
@@ -156,6 +124,7 @@ export function Hero() {
   });
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 110]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
 
   useEffect(() => {
     if (reduce) return;
@@ -181,22 +150,56 @@ export function Hero() {
       id="top"
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-5 pb-20 pt-28 sm:px-6 sm:pt-32"
     >
-      <BreathingMark reduce={reduce} />
+      <Aurora
+        blobs={[
+          { className: "-left-[12%] top-[6%] h-[38rem] w-[38rem]", color: wash("mint", 0.5) },
+          { className: "-right-[10%] top-[18%] h-[34rem] w-[34rem]", color: wash("violet", 0.5), delay: "-7s" },
+          { className: "bottom-[-14%] left-[28%] h-[30rem] w-[30rem]", color: wash("blue", 0.45), delay: "-13s" },
+        ]}
+      />
 
-      {/* a few calm shapes — soft, sparse, never neon */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Floater {...shape} depth={-38} drift={16} duration={13} className="left-[6%] top-[22%] hidden lg:block">
-          <div className="h-32 w-32 rounded-full border border-mint/20" />
-        </Floater>
-        <Floater {...shape} depth={30} drift={-14} duration={15} delay={1} className="right-[8%] top-[20%] hidden lg:block">
-          <div className="h-20 w-20 rounded-full bg-mint/15" />
-        </Floater>
-        <Floater {...shape} depth={44} drift={18} duration={17} delay={2} className="bottom-[18%] right-[12%] hidden lg:block">
-          <div className="h-24 w-24 rounded-full border border-blue/25" />
-        </Floater>
-        <Floater {...shape} depth={-26} drift={-15} duration={14} delay={0.5} className="bottom-[16%] left-[10%] hidden lg:block">
-          <div className="h-12 w-28 rounded-full bg-blue/12" />
-        </Floater>
+      {/* perspective floor */}
+      <div
+        className="grid-floor pointer-events-none absolute inset-x-0 bottom-0 h-[42vh] opacity-[0.35]"
+        aria-hidden
+      />
+
+      {/* the 3D object, behind the type and never taking pointer events */}
+      <motion.div
+        style={reduce ? undefined : { scale: sceneScale }}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        aria-hidden
+      >
+        <HeroCanvas className="h-[min(70vh,38rem)] w-[min(88vw,38rem)] -translate-y-[7%]" />
+      </motion.div>
+
+      {/* A scrim between the object and the type. Without it the rim
+          highlights cut through the headline at certain rotations. */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(closest-side at 50% 44%, var(--background) 26%, transparent 72%)",
+          opacity: 0.6,
+        }}
+        aria-hidden
+      />
+
+      {/* orbiting glass chips */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
+        {chips.map((c, i) => (
+          <Floater key={c.label} {...shape} {...c} delay={i * 0.6}>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, ease, delay: 1.2 + i * 0.12 }}
+              className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-strong"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+              {c.label}
+            </motion.span>
+          </Floater>
+        ))}
       </div>
 
       <motion.div
@@ -207,15 +210,18 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.1 }}
-          className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-background-2/60 px-4 py-2 text-xs font-medium text-muted-strong"
+          className="glass mb-7 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-strong"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-mint" />
+          </span>
           Full-service software company · Maldives
         </motion.p>
 
-        <h1 className="text-[2.6rem] font-bold leading-[1.08] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+        <h1 className="text-[2.7rem] font-bold leading-[1.06] tracking-tight text-foreground sm:text-6xl lg:text-[5.2rem]">
           <WordReveal text="Any problem." delay={0.2} />
-          <WordReveal text="One solution." delay={0.4} className="text-mint-ink" />
+          <WordReveal text="One solution." delay={0.4} className="text-gradient" />
         </h1>
 
         <motion.p
@@ -256,14 +262,20 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 1 }}
-          className="mt-10 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
+          className="mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row"
         >
-          <StartProjectButton variant="solid" size="lg" className="w-full sm:w-auto" />
+          <Magnetic className="w-full sm:w-auto">
+            <StartProjectButton variant="solid" size="lg" className="w-full sm:w-auto" />
+          </Magnetic>
           <a
             href="#services"
-            className="text-sm font-medium text-muted transition-colors duration-300 hover:text-mint-ink"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors duration-300 hover:text-mint-ink"
           >
-            See what we build →
+            See what we build
+            <ArrowRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
           </a>
         </motion.div>
 
@@ -277,11 +289,11 @@ export function Hero() {
           <span className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted/80">
             Trusted by
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+          <div className="glass flex flex-wrap items-center justify-center gap-x-7 gap-y-2 rounded-2xl px-6 py-3">
             {clients.map((c) => (
               <span
                 key={c}
-                className="text-sm font-semibold tracking-tight text-muted-strong"
+                className="text-sm font-semibold tracking-tight text-muted-strong transition-colors duration-300 hover:text-foreground"
               >
                 {c}
               </span>
@@ -297,7 +309,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.9 }}
         aria-label="Scroll to services"
-        className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 sm:block"
+        className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 sm:block"
       >
         <div className="flex h-9 w-6 items-start justify-center rounded-full border border-[var(--line-strong)] p-1.5">
           <motion.div

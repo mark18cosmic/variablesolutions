@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0d1114" },
+    { media: "(prefers-color-scheme: dark)", color: "#080b0e" },
     { media: "(prefers-color-scheme: light)", color: "#f6f8f7" },
   ],
   colorScheme: "dark light",
@@ -89,7 +89,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <StructuredData />
       </head>
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="grain min-h-full flex flex-col antialiased">
         {children}
         <StartProjectModal />
       </body>

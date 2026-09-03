@@ -46,7 +46,7 @@ export function SiteNav() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
         scrolled
-          ? "border-b border-[var(--line)] bg-[var(--nav-bg)] backdrop-blur-xl"
+          ? "border-b border-[var(--line)] bg-[var(--nav-bg)] backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent"
       )}
     >
@@ -64,7 +64,7 @@ export function SiteNav() {
               className="group relative text-sm font-medium text-muted-strong transition-colors duration-300 hover:text-mint-ink"
             >
               {l.label}
-              <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-mint transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-gradient-to-r from-mint to-violet transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -93,7 +93,7 @@ export function SiteNav() {
 
       {/* scroll progress */}
       <motion.div
-        className="h-0.5 origin-left bg-mint"
+        className="h-0.5 origin-left bg-gradient-to-r from-mint via-blue to-violet"
         style={{ scaleX: scrollYProgress }}
         aria-hidden
       />

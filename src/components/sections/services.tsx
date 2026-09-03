@@ -14,6 +14,8 @@ import {
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { openStartProject } from "@/components/start-project";
+import { Tilt, Layer } from "@/components/tilt";
+import { Aurora, wash } from "@/components/aurora";
 import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -68,32 +70,47 @@ function ServiceCard({ service, active }: { service: Service; active: boolean })
   const { icon: Icon, title, copy, tags } = service;
 
   return (
-    <div
-      className={cn(
-        "card-soft group flex h-full flex-col rounded-2xl border bg-background-2 p-6 transition-colors duration-500 sm:p-7",
-        active ? "border-mint/35" : "border-[var(--line)] hover:border-mint/25"
-      )}
-    >
-      <div className="mb-5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-background transition-transform duration-500 group-hover:scale-105">
-        <Icon size={26} />
-      </div>
+    <Tilt className="rounded-2xl">
+      <div
+        data-active={active}
+        className={cn(
+          "card-soft surface gradient-ring group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-background-2 p-6 transition-colors duration-500 sm:p-7",
+          active ? "border-mint/35" : "border-[var(--line)] hover:border-mint/25"
+        )}
+      >
+        {/* a wash that only wakes up on hover, so idle cards stay flat */}
+        <div
+          className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+          style={{ background: wash("mint", 0.45) }}
+          aria-hidden
+        />
 
-      <h3 className="mb-2.5 text-lg font-bold tracking-tight text-foreground sm:text-xl">
-        {title}
-      </h3>
-      <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">{copy}</p>
-
-      <div className="flex flex-wrap gap-2">
-        {tags.map((t) => (
-          <span
-            key={t}
-            className="rounded-full bg-background px-2.5 py-1 text-xs font-medium text-muted-strong"
-          >
-            {t}
+        <Layer z={34} className="relative mb-5 w-fit">
+          <span className="absolute inset-0 rounded-xl bg-gradient-to-br from-mint/30 via-blue/20 to-violet/30 blur-md" />
+          <span className="relative inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--glass-line)] bg-background transition-transform duration-500 group-hover:scale-105">
+            <Icon size={26} />
           </span>
-        ))}
+        </Layer>
+
+        <Layer z={22} className="relative flex flex-1 flex-col">
+          <h3 className="mb-2.5 text-lg font-bold tracking-tight text-foreground sm:text-xl">
+            {title}
+          </h3>
+          <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">{copy}</p>
+
+          <div className="flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-[var(--line)] bg-background px-2.5 py-1 text-xs font-medium text-muted-strong transition-colors duration-300 group-hover:border-mint/25"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </Layer>
       </div>
-    </div>
+    </Tilt>
   );
 }
 
@@ -177,17 +194,25 @@ export function Services() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative flex min-h-screen items-center border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
+      className="relative flex min-h-screen items-center overflow-hidden border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
-      <div className="mx-auto w-full max-w-7xl">
+      <Aurora
+        blobs={[
+          { className: "-left-[14%] top-[10%] h-[32rem] w-[32rem]", color: wash("blue", 0.4) },
+          { className: "-right-[12%] bottom-[6%] h-[30rem] w-[30rem]", color: wash("mint", 0.4), delay: "-9s" },
+        ]}
+      />
+
+      <div className="relative mx-auto w-full max-w-7xl">
         <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
-          <Reveal className="max-w-2xl">
+          <Reveal className="max-w-3xl">
             <SectionLabel>What we build</SectionLabel>
             <h2
               id="services-heading"
               className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              One team for everything digital.
+              One team for <span className="text-gradient">everything</span>{" "}
+              digital.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Whatever the challenge, we bring the planning, design and

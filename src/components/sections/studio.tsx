@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView, animate, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
+import { Tilt } from "@/components/tilt";
+import { Aurora, wash } from "@/components/aurora";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -112,7 +114,7 @@ const blocks: Block[] = [
     label: "Built in-house",
     value: 100,
     suffix: "%",
-    surface: "bg-background-2 border border-[var(--line)]",
+    surface: "bg-background-2 border border-[var(--line)] gradient-ring",
     fg: "text-foreground",
     muted: "text-muted",
     accent: <WavyCorner stroke="rgba(46,230,168,0.4)" />,
@@ -121,7 +123,7 @@ const blocks: Block[] = [
     label: "Off-the-shelf templates",
     value: 0,
     suffix: "",
-    surface: "bg-mint",
+    surface: "bg-gradient-to-br from-mint to-[#12c98d]",
     fg: "text-[#0b1310]",
     muted: "text-[#0b1310]/65",
     accent: <SwirlCorner stroke="rgba(11,19,16,0.3)" />,
@@ -130,7 +132,7 @@ const blocks: Block[] = [
     label: "Team, every layer",
     value: 1,
     suffix: "",
-    surface: "bg-blue",
+    surface: "bg-gradient-to-br from-blue to-violet",
     fg: "text-white",
     muted: "text-white/75",
     accent: <ArcCorner stroke="rgba(255,255,255,0.38)" />,
@@ -139,7 +141,7 @@ const blocks: Block[] = [
     label: "Care after launch",
     value: 24,
     suffix: "/7",
-    surface: "bg-background-3 border border-[var(--line)]",
+    surface: "bg-background-3 border border-[var(--line)] gradient-ring",
     fg: "text-foreground",
     muted: "text-muted",
     accent: <WavyCorner stroke="rgba(47,142,240,0.4)" />,
@@ -163,14 +165,21 @@ export function Studio() {
       aria-labelledby="studio-heading"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden border-t border-[var(--line)] py-24"
     >
+      <Aurora
+        blobs={[
+          { className: "left-[8%] top-[2%] h-[30rem] w-[30rem]", color: wash("violet", 0.35) },
+          { className: "right-[4%] bottom-[10%] h-[28rem] w-[28rem]", color: wash("mint", 0.35), delay: "-6s" },
+        ]}
+      />
+
       <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-10">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-3xl text-center">
           <SectionLabel className="justify-center">Why us</SectionLabel>
           <h2
             id="studio-heading"
             className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
-            Small enough to care, built to deliver.
+            Small enough to care, <span className="text-gradient">built to deliver.</span>
           </h2>
         </Reveal>
 
@@ -182,19 +191,25 @@ export function Studio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.65, ease, delay: i * 0.07 }}
-              className={`card-soft relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-2xl p-6 ${b.surface}`}
-          >
-              {b.accent}
-              <span
-                className={`relative text-xs font-semibold uppercase tracking-[0.1em] ${b.muted}`}
+              className="h-full"
             >
-                {b.label}
-              </span>
-              <div
-                className={`relative text-3xl font-bold tracking-tight sm:text-4xl ${b.fg}`}
-            >
-                {b.headline ?? <Counter to={b.value} suffix={b.suffix} />}
-              </div>
+              <Tilt className="rounded-2xl" intensity={8} glare={false}>
+                <div
+                  className={`card-soft relative flex h-full min-h-[190px] flex-col justify-between overflow-hidden rounded-2xl p-6 ${b.surface}`}
+                >
+                  {b.accent}
+                  <span
+                    className={`relative text-xs font-semibold uppercase tracking-[0.1em] ${b.muted}`}
+                  >
+                    {b.label}
+                  </span>
+                  <div
+                    className={`relative text-3xl font-bold tracking-tight sm:text-4xl ${b.fg}`}
+                  >
+                    {b.headline ?? <Counter to={b.value} suffix={b.suffix} />}
+                  </div>
+                </div>
+              </Tilt>
             </motion.div>
           ))}
         </div>
@@ -217,7 +232,7 @@ export function Studio() {
             {[...marquee, ...marquee].map((m, i) => (
               <span
                 key={i}
-                className="flex items-center gap-8 whitespace-nowrap text-xl font-bold tracking-tight text-muted/55 sm:text-2xl"
+                className="flex items-center gap-8 whitespace-nowrap text-xl font-bold tracking-tight text-muted/55 transition-colors duration-300 hover:text-mint-ink sm:text-2xl"
             >
                 {m}
                 <span className="h-1.5 w-1.5 rounded-full bg-mint/40" />

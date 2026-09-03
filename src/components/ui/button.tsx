@@ -4,15 +4,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium tracking-normal transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium tracking-normal transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
   {
     variants: {
       variant: {
-        // Mint-filled primary CTA, dark text — works on both themes
+        // Mint-filled primary CTA, dark text — works on both themes.
+        // The shadow is a coloured halo rather than a drop shadow, which
+        // is what makes it read as lit rather than raised.
         solid:
-          "bg-mint text-[#0b1310] font-semibold hover:bg-[#25d097]",
+          "bg-gradient-to-r from-mint to-[#3ff0c9] text-[#0b1310] font-semibold shadow-[0_8px_30px_-8px_rgba(46,230,168,0.65)] hover:shadow-[0_12px_44px_-8px_rgba(46,230,168,0.85)] hover:brightness-105",
         outline:
-          "border border-[var(--line-strong)] text-foreground bg-transparent hover:border-mint hover:text-mint-ink",
+          "glass text-foreground hover:border-mint/50 hover:text-mint-ink",
         ghost: "text-muted-strong hover:text-mint-ink bg-transparent",
         link: "text-mint-ink underline-offset-4 hover:underline",
       },

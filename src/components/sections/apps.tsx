@@ -8,6 +8,9 @@ import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { Button } from "@/components/ui/button";
 import { openStartProject } from "@/components/start-project";
+import { Tilt, Layer } from "@/components/tilt";
+import { Aurora, wash } from "@/components/aurora";
+import { Magnetic } from "@/components/magnetic";
 import {
   WalletIcon,
   ClockIcon,
@@ -89,6 +92,26 @@ function SuperMark({ size = 54 }: { size?: number }) {
 
 const products: Product[] = [
   {
+    id: "super-app",
+    name: "Super App",
+    badge: "Coming soon",
+    tagline: "One app for everything your business runs on",
+    headline: "All in one app, instead of six that don't talk to each other.",
+    copy: "One account, one bill, one place your team already knows. Turn on the modules you need — HR, invoicing, point of sale, bookings, payments — and everything shares the same customers, staff and numbers underneath.",
+    mark: SuperMark,
+    image: "/apps/super-app.svg",
+    alt: "Super App all-in-one business platform showing modules, a mobile app and activity",
+    primary: { label: "Get on the list", mail: "Super%20App" },
+    features: [
+      { icon: LayersIcon, label: "Modules", copy: "Switch on HR, billing, POS or bookings as you grow." },
+      { icon: KeyIcon, label: "One account", copy: "A single login and one bill across every module." },
+      { icon: CardIcon, label: "Payments", copy: "Take card and transfer payments in one flow." },
+      { icon: PhoneIcon, label: "Mobile first", copy: "Built for the phone in your manager's pocket." },
+      { icon: BellIcon, label: "Alerts", copy: "The right person told the moment something needs them." },
+      { icon: GlobeIcon, label: "Island ready", copy: "Works on patchy connections, syncs when it can." },
+    ],
+  },
+  {
     id: "roster",
     name: "Roster",
     badge: "Early access",
@@ -128,26 +151,6 @@ const products: Product[] = [
       { icon: UsersGroupIcon, label: "Clients", copy: "Every invoice, payment and note against the right customer." },
     ],
   },
-  {
-    id: "super-app",
-    name: "Super App",
-    badge: "Coming soon",
-    tagline: "One app for everything your business runs on",
-    headline: "All in one app, instead of six that don't talk to each other.",
-    copy: "One account, one bill, one place your team already knows. Turn on the modules you need — HR, invoicing, point of sale, bookings, payments — and everything shares the same customers, staff and numbers underneath.",
-    mark: SuperMark,
-    image: "/apps/super-app.svg",
-    alt: "Super App all-in-one business platform showing modules, a mobile app and activity",
-    primary: { label: "Get on the list", mail: "Super%20App" },
-    features: [
-      { icon: LayersIcon, label: "Modules", copy: "Switch on HR, billing, POS or bookings as you grow." },
-      { icon: KeyIcon, label: "One account", copy: "A single login and one bill across every module." },
-      { icon: CardIcon, label: "Payments", copy: "Take card and transfer payments in one flow." },
-      { icon: PhoneIcon, label: "Mobile first", copy: "Built for the phone in your manager's pocket." },
-      { icon: BellIcon, label: "Alerts", copy: "The right person told the moment something needs them." },
-      { icon: GlobeIcon, label: "Island ready", copy: "Works on patchy connections, syncs when it can." },
-    ],
-  },
 ];
 
 function ProductPanel({ product }: { product: Product }) {
@@ -180,13 +183,15 @@ function ProductPanel({ product }: { product: Product }) {
         <p className="mt-3 text-base leading-relaxed text-muted">{product.copy}</p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button variant="solid" className="group w-full sm:w-auto" onClick={openStartProject}>
-            {product.primary.label}
-            <ArrowRight
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </Button>
+          <Magnetic className="w-full sm:w-auto">
+            <Button variant="solid" className="group w-full sm:w-auto" onClick={openStartProject}>
+              {product.primary.label}
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Button>
+          </Magnetic>
           <Button variant="outline" className="w-full sm:w-auto" asChild>
             <a href={`mailto:hello@kmsolutions.mv?subject=${product.primary.mail}`}>
               Book a demo
@@ -195,20 +200,34 @@ function ProductPanel({ product }: { product: Product }) {
         </div>
       </div>
 
-      {/* product preview */}
-      <div className="relative flex items-center border-t border-[var(--line)] bg-background p-5 sm:p-7 lg:border-l lg:border-t-0">
-        <div className="card-soft w-full overflow-hidden rounded-xl border border-[var(--line)]">
-          <Image
-            src={product.image}
-            alt={product.alt}
-            width={720}
-            height={480}
-            priority={product.id === "roster"}
-            loading={product.id === "roster" ? undefined : "lazy"}
-            className="h-auto w-full"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </div>
+      {/* product preview, standing off the panel */}
+      <div className="relative flex items-center overflow-hidden border-t border-[var(--line)] bg-background p-5 sm:p-7 lg:border-l lg:border-t-0">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70"
+          style={{ background: wash("mint", 0.18) }}
+          aria-hidden
+        />
+        <Tilt className="w-full rounded-xl" intensity={7}>
+          <Layer z={44} className="relative">
+            <div className="card-soft gradient-ring w-full overflow-hidden rounded-xl border border-[var(--line)]">
+              <Image
+                src={product.image}
+                alt={product.alt}
+                width={720}
+                height={480}
+                priority={product.id === "super-app"}
+                loading={product.id === "super-app" ? undefined : "lazy"}
+                className="h-auto w-full"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+            </div>
+            {/* contact shadow, sold as depth rather than drawn as a border */}
+            <div
+              className="pointer-events-none absolute inset-x-6 -bottom-5 h-10 rounded-full bg-black/45 blur-2xl"
+              aria-hidden
+            />
+          </Layer>
+        </Tilt>
       </div>
     </div>
   );
@@ -223,16 +242,23 @@ export function Apps() {
     <section
       id="apps"
       aria-labelledby="apps-heading"
-      className="relative flex min-h-screen items-center border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
+      className="relative flex min-h-screen items-center overflow-hidden border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
-      <div className="mx-auto w-full max-w-7xl">
-        <Reveal className="max-w-2xl">
+      <Aurora
+        blobs={[
+          { className: "-right-[16%] top-[4%] h-[36rem] w-[36rem]", color: wash("violet", 0.42) },
+          { className: "-left-[12%] bottom-[2%] h-[30rem] w-[30rem]", color: wash("mint", 0.35), delay: "-11s" },
+        ]}
+      />
+
+      <div className="relative mx-auto w-full max-w-7xl">
+        <Reveal className="max-w-3xl">
           <SectionLabel>In-house apps</SectionLabel>
           <h2
             id="apps-heading"
             className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
-            Products we build, own and run.
+            Products we <span className="text-gradient">build, own</span> and run.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
             Alongside client work, we make our own software for businesses that
@@ -269,7 +295,7 @@ export function Apps() {
                     {selected && (
                       <motion.span
                         layoutId="apps-tab-pill"
-                        className="absolute inset-0 rounded-full bg-mint"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-mint via-mint to-[#5ff0c4]"
                         transition={
                           reduce
                             ? { duration: 0 }
@@ -301,7 +327,7 @@ export function Apps() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.75, ease }}
-          className="card-soft mt-5 overflow-hidden rounded-3xl border border-[var(--line)] bg-background-2"
+          className="card-soft surface gradient-ring mt-5 overflow-hidden rounded-3xl border border-[var(--line)] bg-background-2"
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
