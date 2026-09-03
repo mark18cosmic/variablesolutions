@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { StartProjectModal } from "@/components/start-project";
+import { StructuredData } from "@/components/structured-data";
+import { keywords, site, siteUrl } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -11,25 +13,61 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "KMSolutions — Any problem. One solution.",
-  description:
-    "A full-service software company in the Maldives building HR management systems, POS systems, marketing services, websites, apps, and any custom digital work your business needs.",
-  keywords: [
-    "software company Maldives",
-    "HR management system",
-    "POS system",
-    "custom software",
-    "mobile apps",
-    "web development Maldives",
-    "KMSolutions",
-    "Roster HRM",
-  ],
-  openGraph: {
-    title: "KMSolutions — Any problem. One solution.",
-    description:
-      "Full-service software company in the Maldives. HRM, POS, marketing, websites, apps and custom software — under one roof.",
-    type: "website",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${site.name} — software company in the Maldives`,
+    template: `%s | ${site.name}`,
   },
+  description: site.description,
+  keywords,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: siteUrl }],
+  creator: site.name,
+  publisher: site.name,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: site.name,
+    locale: "en_US",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.shortDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.shortDescription,
+  },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0d1114" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f8f7" },
+  ],
+  colorScheme: "dark light",
 };
 
 /** Applies the saved theme before first paint so there's no flash. */
@@ -49,6 +87,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <StructuredData />
       </head>
       <body className="min-h-full flex flex-col antialiased">
         {children}

@@ -50,12 +50,16 @@ export function Process() {
   return (
     <section
       id="process"
+      aria-labelledby="process-heading"
       className="relative flex min-h-screen items-center border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
       <div className="mx-auto w-full max-w-7xl">
         <Reveal className="max-w-2xl">
           <SectionLabel>How we work</SectionLabel>
-          <h2 className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2
+            id="process-heading"
+            className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             A clear, unhurried process.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
@@ -84,11 +88,11 @@ export function Process() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, ease, delay: 0.15 + i * 0.12 }}
                 className="group relative"
-              >
+            >
                 <div className="relative mb-6 flex items-center gap-3">
                   <span
                     className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-105 ${s.tone}`}
-                  >
+                >
                     <s.icon size={19} strokeWidth={2} />
                   </span>
                   <span className="text-xs font-semibold tracking-[0.1em] text-muted/70">

@@ -30,6 +30,16 @@ const featured: Project = {
   tags: ["Web", "Brand", "Next.js"],
 };
 
+const highlight: Project = {
+  name: "Mahufal",
+  tag: "Live",
+  href: "https://mahufal.mv",
+  copy: "A Maldivian platform built end to end — clean structure, fast pages and a stack that stays easy to run.",
+  image: "/projects/mahufal.svg",
+  alt: "Mahufal.mv website preview",
+  tags: ["Web", "Platform", "SEO"],
+};
+
 const others: Project[] = [
   {
     name: "UnifyGames",
@@ -98,16 +108,86 @@ function ProjectShell({
   return <div className={className}>{children}</div>;
 }
 
+/** The compact project card used for everything beside the feature. */
+function SmallCard({
+  project,
+  delay = 0,
+  sizes = "(min-width: 640px) 46vw, 100vw",
+}: {
+  project: Project;
+  delay?: number;
+  sizes?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.8, ease, delay }}
+      className="h-full"
+    >
+      <ProjectShell project={project} className="block h-full">
+        <Card>
+          <div className="relative aspect-[16/10] w-full overflow-hidden bg-background">
+            <Image
+              src={project.image}
+              alt={project.alt}
+              fill
+              loading="lazy"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              sizes={sizes}
+            />
+            <div className="absolute left-4 top-4">
+              <LiveBadge label={project.tag} />
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col p-6">
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="text-xl font-bold tracking-tight text-foreground">
+                {project.name}
+              </h3>
+              <ArrowUpRight
+                size={19}
+                className="mt-0.5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-mint-ink"
+              />
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-muted">{project.copy}</p>
+            <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full bg-background px-2.5 py-1 text-[0.68rem] tracking-wide text-muted-strong"
+              >
+                  {t}
+                </span>
+              ))}
+              {project.href && (
+                <span className="ml-auto text-[0.68rem] font-semibold text-mint-ink">
+                  {project.href.replace("https://", "")} →
+                </span>
+              )}
+            </div>
+          </div>
+        </Card>
+      </ProjectShell>
+    </motion.div>
+  );
+}
+
 export function Portfolio() {
   return (
     <section
       id="work"
+      aria-labelledby="work-heading"
       className="relative flex min-h-screen items-center overflow-hidden border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
       <div className="relative mx-auto w-full max-w-7xl">
         <Reveal className="max-w-2xl">
           <SectionLabel>Selected work</SectionLabel>
-          <h2 className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2
+            id="work-heading"
+            className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             A young company, <span className="text-mint-ink">big ambitions.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
@@ -159,7 +239,7 @@ export function Portfolio() {
                       <span
                         key={t}
                         className="rounded-full bg-background px-3 py-1 text-xs tracking-wide text-muted-strong"
-                      >
+                    >
                         {t}
                       </span>
                     ))}
@@ -172,61 +252,15 @@ export function Portfolio() {
             </ProjectShell>
           </motion.div>
 
-          {/* the two newer clients, stacked beside the feature */}
-          <div className="flex flex-col gap-5">
-            {others.map((p, i) => (
-              <motion.div
-                key={p.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8, ease, delay: 0.1 + i * 0.1 }}
-                className="flex-1"
-              >
-                <ProjectShell project={p} className="block h-full">
-                  <Card>
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-background">
-                      <Image
-                        src={p.image}
-                        alt={p.alt}
-                        fill
-                        loading="lazy"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                        sizes="(min-width: 1024px) 32vw, 100vw"
-                      />
-                      <div className="absolute left-4 top-4">
-                        <LiveBadge label={p.tag} />
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-xl font-bold tracking-tight text-foreground">
-                          {p.name}
-                        </h3>
-                        <ArrowUpRight
-                          size={19}
-                          className="mt-0.5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-mint-ink"
-                        />
-                      </div>
-                      <p className="mt-2 text-xs leading-relaxed text-muted">
-                        {p.copy}
-                      </p>
-                      <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                        {p.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full bg-background px-2.5 py-1 text-[0.68rem] tracking-wide text-muted-strong"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                </ProjectShell>
-              </motion.div>
-            ))}
-          </div>
+          {/* newest client, tall beside the feature */}
+          <SmallCard project={highlight} delay={0.1} sizes="(min-width: 1024px) 32vw, 100vw" />
+        </div>
+
+        {/* earlier work */}
+        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {others.map((p, i) => (
+            <SmallCard key={p.name} project={p} delay={0.05 + i * 0.1} />
+          ))}
         </div>
 
         {/* invitation strip */}

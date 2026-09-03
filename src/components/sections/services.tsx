@@ -176,13 +176,17 @@ export function Services() {
   return (
     <section
       id="services"
+      aria-labelledby="services-heading"
       className="relative flex min-h-screen items-center border-t border-[var(--line)] px-5 py-24 sm:px-6 lg:px-10"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
           <Reveal className="max-w-2xl">
             <SectionLabel>What we build</SectionLabel>
-            <h2 className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2
+              id="services-heading"
+              className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            >
               One team for everything digital.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
@@ -197,7 +201,7 @@ export function Services() {
               onClick={() => goTo(active - 1)}
               aria-label="Previous services"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] text-muted-strong transition-colors duration-300 hover:border-mint hover:text-mint-ink"
-            >
+          >
               <ArrowLeft size={17} />
             </button>
             <button
@@ -205,7 +209,7 @@ export function Services() {
               onClick={() => goTo(active + 1)}
               aria-label="Next services"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] text-muted-strong transition-colors duration-300 hover:border-mint hover:text-mint-ink"
-            >
+          >
               <ArrowRight size={17} />
             </button>
           </Reveal>
@@ -231,7 +235,7 @@ export function Services() {
               <div
                 key={s.title}
                 className="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
-              >
+            >
                 <ServiceCard service={s} active={i === active} />
               </div>
             ))}
@@ -269,7 +273,7 @@ export function Services() {
               <span
                 key={c}
                 className="rounded-full border border-[var(--line)] px-3.5 py-1.5 text-xs font-medium text-muted transition-colors duration-300 hover:border-mint/35 hover:text-mint-ink"
-              >
+            >
                 {c}
               </span>
             ))}
@@ -277,7 +281,7 @@ export function Services() {
               type="button"
               onClick={openStartProject}
               className="rounded-full bg-mint px-3.5 py-1.5 text-xs font-semibold text-[#0b1310] transition-colors duration-300 hover:bg-[#25d097]"
-            >
+          >
               Something else? Ask us →
             </button>
           </div>

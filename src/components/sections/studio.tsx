@@ -160,12 +160,16 @@ export function Studio() {
   return (
     <section
       id="studio"
+      aria-labelledby="studio-heading"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden border-t border-[var(--line)] py-24"
     >
       <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
           <SectionLabel className="justify-center">Why us</SectionLabel>
-          <h2 className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2
+            id="studio-heading"
+            className="mt-4 text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             Small enough to care, built to deliver.
           </h2>
         </Reveal>
@@ -179,16 +183,16 @@ export function Studio() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.65, ease, delay: i * 0.07 }}
               className={`card-soft relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-2xl p-6 ${b.surface}`}
-            >
+          >
               {b.accent}
               <span
                 className={`relative text-xs font-semibold uppercase tracking-[0.1em] ${b.muted}`}
-              >
+            >
                 {b.label}
               </span>
               <div
                 className={`relative text-3xl font-bold tracking-tight sm:text-4xl ${b.fg}`}
-              >
+            >
                 {b.headline ?? <Counter to={b.value} suffix={b.suffix} />}
               </div>
             </motion.div>
@@ -214,7 +218,7 @@ export function Studio() {
               <span
                 key={i}
                 className="flex items-center gap-8 whitespace-nowrap text-xl font-bold tracking-tight text-muted/55 sm:text-2xl"
-              >
+            >
                 {m}
                 <span className="h-1.5 w-1.5 rounded-full bg-mint/40" />
               </span>

@@ -8,6 +8,7 @@ export function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="relative flex min-h-screen items-center overflow-hidden border-t border-[var(--line)] px-5 py-24 sm:px-6"
     >
       {/* soft brand shapes, low contrast */}
@@ -21,7 +22,10 @@ export function Contact() {
           <SectionLabel className="justify-center">Get in touch</SectionLabel>
         </Reveal>
         <Reveal delay={0.08}>
-          <h2 className="mt-5 text-3xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2
+            id="contact-heading"
+            className="mt-5 text-3xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             Let&apos;s build the <span className="text-mint-ink">solution</span>{" "}
             your business deserves.
           </h2>
@@ -47,7 +51,7 @@ export function Contact() {
             <a
               href="mailto:hello@kmsolutions.mv"
               className="inline-flex items-center gap-2 transition-colors hover:text-mint-ink"
-            >
+          >
               <Mail size={15} strokeWidth={1.8} />
               hello@kmsolutions.mv
             </a>

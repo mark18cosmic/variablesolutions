@@ -16,8 +16,9 @@ const columns = [
   {
     title: "Apps",
     links: [
-      { label: "Roster — HRM", href: "#apps" },
-      { label: "More coming soon", href: "#apps" },
+      { label: "Roster — HR software", href: "#apps" },
+      { label: "Ledgr — accounting & invoicing", href: "#apps" },
+      { label: "Super App — all in one", href: "#apps" },
     ],
   },
   {

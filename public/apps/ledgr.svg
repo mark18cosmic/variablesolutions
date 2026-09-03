@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480">
+  <rect width="720" height="480" fill="#0a0a0a" />
+
+  <!-- sidebar -->
+  <rect x="0" y="0" width="150" height="480" fill="#12181F" />
+  <rect x="20" y="24" width="20" height="20" rx="6" fill="#2EE6A8" />
+  <rect x="48" y="28" width="56" height="11" rx="5.5" fill="#F4F6F5" opacity="0.85" />
+
+  <rect x="16" y="72" width="118" height="30" rx="8" fill="#2EE6A8" opacity="0.14" />
+  <rect x="30" y="83" width="10" height="10" rx="3" fill="#2EE6A8" />
+  <rect x="48" y="82" width="58" height="9" rx="4.5" fill="#2EE6A8" opacity="0.9" />
+
+  <rect x="30" y="122" width="10" height="10" rx="3" fill="#F4F6F5" opacity="0.3" />
+  <rect x="48" y="122" width="66" height="9" rx="4.5" fill="#F4F6F5" opacity="0.25" />
+  <rect x="30" y="158" width="10" height="10" rx="3" fill="#F4F6F5" opacity="0.3" />
+  <rect x="48" y="158" width="48" height="9" rx="4.5" fill="#F4F6F5" opacity="0.25" />
+  <rect x="30" y="194" width="10" height="10" rx="3" fill="#F4F6F5" opacity="0.3" />
+  <rect x="48" y="194" width="62" height="9" rx="4.5" fill="#F4F6F5" opacity="0.25" />
+  <rect x="30" y="230" width="10" height="10" rx="3" fill="#F4F6F5" opacity="0.3" />
+  <rect x="48" y="230" width="54" height="9" rx="4.5" fill="#F4F6F5" opacity="0.25" />
+
+  <!-- header -->
+  <rect x="180" y="30" width="118" height="16" rx="8" fill="#F4F6F5" opacity="0.9" />
+  <rect x="180" y="56" width="86" height="9" rx="4.5" fill="#F4F6F5" opacity="0.35" />
+  <rect x="580" y="28" width="116" height="32" rx="16" fill="#2EE6A8" />
+  <rect x="606" y="41" width="64" height="7" rx="3.5" fill="#0B1310" opacity="0.65" />
+  <rect x="594" y="40" width="9" height="9" rx="2" fill="#0B1310" opacity="0.65" />
+
+  <!-- stat tiles -->
+  <rect x="180" y="96" width="158" height="86" rx="14" fill="#12181F" />
+  <rect x="200" y="116" width="52" height="8" rx="4" fill="#F4F6F5" opacity="0.35" />
+  <rect x="200" y="136" width="78" height="22" rx="6" fill="#2EE6A8" />
+
+  <rect x="352" y="96" width="158" height="86" rx="14" fill="#12181F" />
+  <rect x="372" y="116" width="44" height="8" rx="4" fill="#F4F6F5" opacity="0.35" />
+  <rect x="372" y="136" width="62" height="22" rx="6" fill="#F4F6F5" opacity="0.75" />
+
+  <rect x="524" y="96" width="172" height="86" rx="14" fill="#12181F" />
+  <rect x="544" y="116" width="58" height="8" rx="4" fill="#F4F6F5" opacity="0.35" />
+  <rect x="544" y="136" width="54" height="22" rx="6" fill="#2F8EF0" opacity="0.85" />
+
+  <!-- invoice table -->
+  <rect x="180" y="200" width="330" height="250" rx="14" fill="#12181F" />
+  <rect x="200" y="220" width="76" height="10" rx="5" fill="#F4F6F5" opacity="0.7" />
+  <rect x="200" y="248" width="290" height="1.5" fill="#F4F6F5" opacity="0.12" />
+
+  <g fill="#F4F6F5">
+    <rect x="200" y="266" width="96" height="8" rx="4" opacity="0.5" />
+    <rect x="330" y="266" width="52" height="8" rx="4" opacity="0.3" />
+  </g>
+  <rect x="428" y="261" width="62" height="18" rx="9" fill="#2EE6A8" opacity="0.2" />
+  <rect x="440" y="266" width="38" height="8" rx="4" fill="#2EE6A8" />
+
+  <g fill="#F4F6F5">
+    <rect x="200" y="306" width="84" height="8" rx="4" opacity="0.5" />
+    <rect x="330" y="306" width="58" height="8" rx="4" opacity="0.3" />
+  </g>
+  <rect x="428" y="301" width="62" height="18" rx="9" fill="#2F8EF0" opacity="0.22" />
+  <rect x="440" y="306" width="38" height="8" rx="4" fill="#2F8EF0" />
+
+  <g fill="#F4F6F5">
+    <rect x="200" y="346" width="104" height="8" rx="4" opacity="0.5" />
+    <rect x="330" y="346" width="46" height="8" rx="4" opacity="0.3" />
+  </g>
+  <rect x="428" y="341" width="62" height="18" rx="9" fill="#F4F6F5" opacity="0.12" />
+  <rect x="440" y="346" width="38" height="8" rx="4" fill="#F4F6F5" opacity="0.4" />
+
+  <g fill="#F4F6F5">
+    <rect x="200" y="386" width="90" height="8" rx="4" opacity="0.5" />
+    <rect x="330" y="386" width="54" height="8" rx="4" opacity="0.3" />
+  </g>
+  <rect x="428" y="381" width="62" height="18" rx="9" fill="#2EE6A8" opacity="0.2" />
+  <rect x="440" y="386" width="38" height="8" rx="4" fill="#2EE6A8" />
+
+  <g fill="#F4F6F5">
+    <rect x="200" y="426" width="72" height="8" rx="4" opacity="0.5" />
+    <rect x="330" y="426" width="60" height="8" rx="4" opacity="0.3" />
+  </g>
+
+  <!-- invoice document -->
+  <rect x="524" y="200" width="172" height="250" rx="14" fill="#F4F6F5" />
+  <rect x="544" y="222" width="46" height="10" rx="5" fill="#12181F" opacity="0.85" />
+  <rect x="662" y="220" width="14" height="14" rx="4" fill="#2EE6A8" />
+  <rect x="544" y="248" width="88" height="7" rx="3.5" fill="#12181F" opacity="0.25" />
+  <rect x="544" y="262" width="64" height="7" rx="3.5" fill="#12181F" opacity="0.25" />
+
+  <rect x="544" y="292" width="132" height="1.5" fill="#12181F" opacity="0.12" />
+  <rect x="544" y="306" width="78" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="646" y="306" width="30" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="544" y="326" width="66" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="646" y="326" width="30" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="544" y="346" width="86" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="646" y="346" width="30" height="7" rx="3.5" fill="#12181F" opacity="0.4" />
+  <rect x="544" y="370" width="132" height="1.5" fill="#12181F" opacity="0.12" />
+
+  <rect x="544" y="386" width="42" height="9" rx="4.5" fill="#12181F" opacity="0.6" />
+  <rect x="620" y="382" width="56" height="16" rx="6" fill="#2EE6A8" />
+  <rect x="544" y="418" width="132" height="14" rx="7" fill="#12181F" opacity="0.08" />
+</svg>

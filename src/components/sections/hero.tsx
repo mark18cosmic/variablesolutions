@@ -19,12 +19,13 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const rotating = [
   "HR systems",
   "POS systems",
+  "accounting",
   "marketing",
   "websites & apps",
   "custom software",
 ];
 
-const clients = ["The Edge", "UnifyGames", "Neut"];
+const clients = ["The Edge", "Mahufal", "UnifyGames", "Neut"];
 
 /** Headline that reveals word by word from behind a mask. */
 function WordReveal({
