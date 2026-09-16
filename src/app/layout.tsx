@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { StartProjectModal } from "@/components/start-project";
 import { StructuredData } from "@/components/structured-data";
 import { keywords, site, siteUrl } from "@/lib/site";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -64,8 +63,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#080b0e" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f8f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1113" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
   ],
   colorScheme: "dark light",
 };
@@ -82,14 +81,14 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${spaceGrotesk.variable} h-full`}
+      className={`${inter.variable} h-full`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <StructuredData />
       </head>
-      <body className="grain min-h-full flex flex-col antialiased">
+      <body className="min-h-full flex flex-col antialiased">
         {children}
         <StartProjectModal />
       </body>

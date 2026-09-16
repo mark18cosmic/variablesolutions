@@ -23,10 +23,10 @@ export function LogoMark({
       aria-label="KMSolutions"
       role="img"
     >
-      <rect x="4" y="4" width="92" height="92" rx="24" fill="#151c23" />
-      <circle cx="50" cy="37" r="21" fill="#2EE6A8" />
-      <circle cx="39" cy="61" r="21" fill="#2EE6A8" opacity="0.55" />
-      <circle cx="61" cy="61" r="21" fill="#2EE6A8" opacity="0.8" />
+      <rect x="4" y="4" width="92" height="92" rx="24" fill="#15191c" />
+      <circle cx="50" cy="37" r="21" fill="#21C98F" />
+      <circle cx="39" cy="61" r="21" fill="#21C98F" opacity="0.55" />
+      <circle cx="61" cy="61" r="21" fill="#21C98F" opacity="0.8" />
     </svg>
   );
 }
@@ -44,11 +44,11 @@ export function Wordmark({
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark size={markSize} />
       <span className="flex flex-col leading-none">
-        <span className="text-base font-bold tracking-tight text-foreground sm:text-lg">
+        <span className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
           KMSolutions
         </span>
         {tagline && (
-          <span className="mt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-mint-ink">
+          <span className="mt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-muted">
             Any problem. One solution.
           </span>
         )}

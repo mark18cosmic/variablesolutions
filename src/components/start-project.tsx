@@ -1,13 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, Check, X, Loader2 } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const EVENT = "start-project:open";
-const ease = [0.22, 1, 0.36, 1] as const;
 
 /** Any button/link can open the enquiry modal via this event. */
 export function openStartProject() {
@@ -30,8 +28,8 @@ export function StartProjectButton({
     >
       {children}
       <ArrowRight
-        size={18}
-        className="transition-transform duration-500 group-hover:translate-x-1"
+        size={16}
+        className="transition-transform duration-200 group-hover:translate-x-0.5"
       />
     </Button>
   );
@@ -101,183 +99,146 @@ export function StartProjectModal() {
     }
   }
 
+  if (!open) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+    <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6">
+      <div
+        className="absolute inset-0 bg-[var(--overlay)]"
+        onClick={() => setOpen(false)}
+      />
+
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="start-project-heading"
+        className="relative w-full max-w-lg overflow-hidden rounded-t-2xl border border-[var(--line)] bg-background sm:rounded-2xl"
+      >
+        <button
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+          className="absolute right-4 top-4 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[var(--line)] text-muted transition-colors hover:text-foreground"
         >
-          <motion.div
-            className="absolute inset-0 bg-[var(--overlay)] backdrop-blur-md"
-            onClick={() => setOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
+          <X size={16} />
+        </button>
 
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            className="card-soft relative w-full max-w-lg overflow-hidden rounded-t-3xl border border-[var(--line)] bg-background-2 sm:rounded-3xl"
-            initial={{ y: 60, opacity: 0, scale: 0.98 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 40, opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.5, ease }}
-          >
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="Close"
-              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-muted transition-colors hover:border-mint/40 hover:text-mint-ink"
-            >
-              <X size={16} />
-            </button>
-
-            <div className="relative max-h-[88vh] overflow-y-auto p-7 sm:p-9">
-              <AnimatePresence mode="wait">
-                {status === "done" ? (
-                  <motion.div
-                    key="done"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="py-10 text-center"
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 200, damping: 14 }}
-                      className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-mint text-[#0b1310]"
-                    >
-                      <Check size={28} />
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-foreground">
-                      Idea received.
-                    </h3>
-                    <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
-                      Your enquiry has been logged. We&apos;ll be in touch shortly
-                      — thank you for thinking of us.
-                    </p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-7"
-                      onClick={() => setOpen(false)}
-                    >
-                      Close
-                    </Button>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-mint-ink">
-                      Start a project
-                    </p>
-                    <h3 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
-                      Tell us the idea.
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">
-                      No pitch needed — a few lines is plenty. We read every one.
-                    </p>
-
-                    <form onSubmit={onSubmit} className="mt-7 space-y-4">
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <Field name="name" label="Name" placeholder="Your name" required />
-                        <Field
-                          name="email"
-                          label="Email"
-                          type="email"
-                          placeholder="you@company.com"
-                          required
-                        />
-                      </div>
-                      <Field
-                        name="company"
-                        label="Company"
-                        placeholder="Optional"
-                      />
-
-                      <div>
-                        <label className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted">
-                          Budget
-                        </label>
-                        <div className="flex flex-wrap gap-2">
-                          {budgets.map((b) => (
-                            <button
-                              type="button"
-                              key={b}
-                              onClick={() => setBudget(b)}
-                              className={cn(
-                                "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors duration-300",
-                                budget === b
-                                  ? "border-mint bg-mint/10 text-mint-ink"
-                                  : "border-[var(--line)] text-muted hover:text-mint-ink"
-                              )}
-                            >
-                              {b}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="idea"
-                          className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted"
-                        >
-                          The idea
-                        </label>
-                        <textarea
-                          id="idea"
-                          name="idea"
-                          required
-                          rows={4}
-                          placeholder="What are you trying to build or solve?"
-                          className="w-full resize-none rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint"
-                        />
-                      </div>
-
-                      {status === "error" && (
-                        <p className="text-sm text-red-400">{error}</p>
-                      )}
-
-                      <Button
-                        type="submit"
-                        variant="solid"
-                        size="lg"
-                        className="group w-full"
-                        disabled={status === "saving"}
-                      >
-                        {status === "saving" ? (
-                          <>
-                            <Loader2 size={18} className="animate-spin" />
-                            Saving…
-                          </>
-                        ) : (
-                          <>
-                            Send it over
-                            <ArrowRight
-                              size={18}
-                              className="transition-transform duration-500 group-hover:translate-x-1"
-                            />
-                          </>
-                        )}
-                      </Button>
-                    </form>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+        <div className="max-h-[88vh] overflow-y-auto p-7 sm:p-9">
+          {status === "done" ? (
+            <div className="py-10 text-center">
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-mint text-on-mint">
+                <Check size={26} />
+              </div>
+              <h3
+                id="start-project-heading"
+                className="text-2xl font-semibold tracking-tight text-foreground"
+              >
+                Idea received.
+              </h3>
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
+                Your enquiry has been logged. We&apos;ll be in touch shortly —
+                thank you for thinking of us.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-7"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </Button>
             </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          ) : (
+            <>
+              <h3
+                id="start-project-heading"
+                className="text-2xl font-semibold leading-tight tracking-tight text-foreground"
+              >
+                Tell us the idea.
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                No pitch needed — a few lines is plenty. We read every one.
+              </p>
+
+              <form onSubmit={onSubmit} className="mt-7 space-y-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <Field name="name" label="Name" placeholder="Your name" required />
+                  <Field
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="you@company.com"
+                    required
+                  />
+                </div>
+                <Field name="company" label="Company" placeholder="Optional" />
+
+                <div>
+                  <span className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted">
+                    Budget
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {budgets.map((b) => (
+                      <button
+                        type="button"
+                        key={b}
+                        aria-pressed={budget === b}
+                        onClick={() => setBudget(b)}
+                        className={cn(
+                          "cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors",
+                          budget === b
+                            ? "border-mint text-mint-ink"
+                            : "border-[var(--line)] text-muted hover:text-foreground"
+                        )}
+                      >
+                        {b}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="idea"
+                    className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-muted"
+                  >
+                    The idea
+                  </label>
+                  <textarea
+                    id="idea"
+                    name="idea"
+                    required
+                    rows={4}
+                    placeholder="What are you trying to build or solve?"
+                    className="w-full resize-none rounded-lg border border-[var(--line)] bg-background-2 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-mint"
+                  />
+                </div>
+
+                {status === "error" && (
+                  <p className="text-sm text-red-400">{error}</p>
+                )}
+
+                <Button
+                  type="submit"
+                  variant="solid"
+                  size="lg"
+                  className="w-full"
+                  disabled={status === "saving"}
+                >
+                  {status === "saving" ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Saving…
+                    </>
+                  ) : (
+                    "Send it over"
+                  )}
+                </Button>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -298,7 +259,7 @@ function Field({
         id={name}
         name={name}
         {...props}
-        className="w-full rounded-xl border border-[var(--line)] bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-mint"
+        className="w-full rounded-lg border border-[var(--line)] bg-background-2 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-mint"
       />
     </div>
   );

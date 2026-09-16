@@ -4,24 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium tracking-normal transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
   {
     variants: {
       variant: {
-        // Mint-filled primary CTA, dark text — works on both themes.
-        // The shadow is a coloured halo rather than a drop shadow, which
-        // is what makes it read as lit rather than raised.
-        solid:
-          "bg-gradient-to-r from-mint to-[#3ff0c9] text-[#0b1310] font-semibold shadow-[0_8px_30px_-8px_rgba(46,230,168,0.65)] hover:shadow-[0_12px_44px_-8px_rgba(46,230,168,0.85)] hover:brightness-105",
+        // Flat mint fill, no glow. The accent only appears on the one
+        // control per view that we actually want clicked.
+        solid: "bg-mint text-on-mint font-medium hover:opacity-90",
         outline:
-          "glass text-foreground hover:border-mint/50 hover:text-mint-ink",
-        ghost: "text-muted-strong hover:text-mint-ink bg-transparent",
+          "border border-[var(--line-strong)] text-foreground hover:bg-background-2",
+        ghost: "text-muted-strong hover:text-foreground bg-transparent",
         link: "text-mint-ink underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",
         sm: "h-9 px-4",
-        lg: "h-13 px-8 text-base",
+        lg: "h-12 px-7 text-base",
         icon: "h-10 w-10",
       },
     },

@@ -45,7 +45,7 @@ export function Footer() {
             <div className="mt-5 flex flex-col gap-2.5 text-sm text-muted">
               <a
                 href="mailto:hello@kmsolutions.mv"
-                className="inline-flex items-center gap-2 transition-colors hover:text-mint-ink"
+                className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
               >
                 <Mail size={14} strokeWidth={1.8} />
                 hello@kmsolutions.mv
@@ -59,7 +59,7 @@ export function Footer() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-mint-ink">
+              <h4 className="text-xs font-medium uppercase tracking-[0.12em] text-foreground">
                 {col.title}
               </h4>
               <ul className="mt-4 space-y-2.5">
@@ -67,7 +67,7 @@ export function Footer() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="text-sm text-muted transition-colors duration-300 hover:text-mint-ink"
+                      className="text-sm text-muted transition-colors hover:text-foreground"
                     >
                       {l.label}
                     </a>

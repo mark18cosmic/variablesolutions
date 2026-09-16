@@ -1,106 +1,63 @@
 @import "tailwindcss";
 
 /* ============================================================
-   KMSOLUTIONS — expressive, high-contrast SaaS system
+   KMSolutions — a plain, quiet design system.
 
-   Dark is the brand default; light mode is an opt-in toggle.
-   Surfaces are soft charcoal/navy rather than pure black, so the
-   palette reads professional rather than neon-on-void.
-
-   Mint (#2EE6A8) is the brand fill and stays constant across
-   themes. `--mint-ink` is the readable text/label variant — it
-   darkens in light mode, where mint on white would fail contrast.
-   Blue and violet widen the ramp so gradients have somewhere to
-   travel; every gradient below is built from those three stops.
-
-   Everything that moves here animates transform/opacity only, so
-   the whole page stays on the compositor.
+   One accent (mint, from the logo), neutral surfaces, hairline
+   borders and flat fills. No gradients, no glow, no ambient wash:
+   contrast and spacing do the work instead.
    ============================================================ */
 
 :root {
-  --background: #080b0e;
-  --background-2: #10161c;
-  --background-3: #171f27;
-  --foreground: #f2f5f4;
+  --background: #0e1113;
+  --background-2: #15191c;
+  --background-3: #1c2124;
+  --foreground: #eceeef;
 
-  --mint: #2ee6a8;
-  --mint-ink: #45ecb5;
-  --blue: #2f8ef0;
-  --violet: #8b5cf6;
-  --violet-ink: #a78bfa;
-  --off-white: #f4f6f5;
+  --mint: #21c98f;
+  --mint-ink: #3ddba4;
 
-  /* muted secondary text */
-  --muted: #98a29d;
-  --muted-strong: #c5ccc8;
+  --muted: #939b9f;
+  --muted-strong: #c3c9cc;
 
-  --line: rgba(242, 245, 244, 0.09);
-  --line-strong: rgba(242, 245, 244, 0.18);
+  --line: rgba(236, 238, 239, 0.1);
+  --line-strong: rgba(236, 238, 239, 0.2);
 
-  /* themed surfaces */
-  --nav-bg: rgba(8, 11, 14, 0.72);
-  --overlay: rgba(4, 6, 8, 0.78);
+  --nav-bg: rgba(14, 17, 19, 0.85);
+  --overlay: rgba(0, 0, 0, 0.6);
 
-  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 24px 48px -32px rgba(0, 0, 0, 0.9);
-  --card-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
-    0 40px 80px -40px rgba(0, 0, 0, 0.95);
+  --contrast-surface: #eceeef;
+  --contrast-ink: #0e1113;
 
-  /* glass panels */
-  --glass: rgba(255, 255, 255, 0.035);
-  --glass-line: rgba(255, 255, 255, 0.1);
-  --glass-hi: rgba(255, 255, 255, 0.14);
+  --on-mint: #07231a;
 
-  /* inverted block used in the proof grid */
-  --contrast-surface: #f4f6f5;
-  --contrast-ink: #0d1114;
-
-  --scroll-track: #080b0e;
-  --scroll-thumb: #232c35;
-  --scroll-thumb-hover: #2e3944;
-
-  /* aurora wash strength — dialled down in light mode */
-  --aurora-alpha: 0.62;
-  --grain-alpha: 0.035;
+  --scroll-thumb: #2b3236;
 }
 
 :root[data-theme="light"] {
-  --background: #f6f8f7;
-  --background-2: #ffffff;
-  --background-3: #eef1f0;
-  --foreground: #131a20;
+  --background: #ffffff;
+  --background-2: #f7f8f8;
+  --background-3: #eff1f1;
+  --foreground: #14181a;
 
-  --mint: #2ee6a8;
-  --mint-ink: #0a8560;
-  --blue: #1d74d1;
-  --violet: #6d3ff0;
-  --violet-ink: #5b2fd6;
+  --mint: #0f9c6c;
+  --mint-ink: #0b7d56;
 
-  --muted: #626d68;
-  --muted-strong: #3a443f;
+  --muted: #646c70;
+  --muted-strong: #3b4245;
 
-  --line: rgba(19, 26, 32, 0.1);
-  --line-strong: rgba(19, 26, 32, 0.2);
+  --line: rgba(20, 24, 26, 0.11);
+  --line-strong: rgba(20, 24, 26, 0.22);
 
-  --nav-bg: rgba(246, 248, 247, 0.8);
-  --overlay: rgba(19, 26, 32, 0.4);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --overlay: rgba(20, 24, 26, 0.45);
 
-  --card-shadow: 0 1px 2px rgba(19, 26, 32, 0.04), 0 18px 40px -24px rgba(19, 26, 32, 0.18);
-  --card-shadow-hover: 0 2px 4px rgba(19, 26, 32, 0.05), 0 32px 64px -28px rgba(19, 26, 32, 0.26);
+  --contrast-surface: #14181a;
+  --contrast-ink: #f7f8f8;
 
-  --glass: rgba(255, 255, 255, 0.6);
-  --glass-line: rgba(19, 26, 32, 0.08);
-  --glass-hi: rgba(255, 255, 255, 0.9);
+  --on-mint: #ffffff;
 
-  --contrast-surface: #10161c;
-  --contrast-ink: #f4f6f5;
-
-  --scroll-track: #eaedec;
-  --scroll-thumb: #c6ccc9;
-  --scroll-thumb-hover: #aab2ae;
-
-  --aurora-alpha: 0.32;
-  --grain-alpha: 0.02;
+  --scroll-thumb: #c9cecf;
 }
 
 @theme inline {
@@ -110,16 +67,13 @@
   --color-foreground: var(--foreground);
   --color-mint: var(--mint);
   --color-mint-ink: var(--mint-ink);
-  --color-blue: var(--blue);
-  --color-violet: var(--violet);
-  --color-violet-ink: var(--violet-ink);
-  --color-off-white: var(--off-white);
   --color-muted: var(--muted);
   --color-muted-strong: var(--muted-strong);
   --color-contrast-surface: var(--contrast-surface);
   --color-contrast-ink: var(--contrast-ink);
+  --color-on-mint: var(--on-mint);
 
-  --font-sans: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
 }
 
 * {
@@ -128,111 +82,77 @@
 
 html {
   scroll-behavior: smooth;
-  /* The scroll container itself: Motion measures scroll-linked targets
-     relative to it, which it can only do reliably if it is positioned. */
-  position: relative;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* ---------- brand gradients ---------------------------------- */
+/* ---------- reveal on scroll ---------------------------------
+   One class, driven by an IntersectionObserver that sets
+   data-shown. Cheaper than an animation library and it degrades
+   to "always visible" if JS never runs. */
 
-.text-gradient {
-  background: linear-gradient(
-    100deg,
-    var(--mint) 0%,
-    var(--blue) 42%,
-    var(--violet-ink) 72%,
-    var(--mint) 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-pan 9s linear infinite;
-}
-
-@keyframes gradient-pan {
-  to {
-    background-position: 220% 0;
-  }
-}
-
-/* On white the mint stop is far too light to read as text, so the
-   light theme runs the same ramp through the darker ink variants. */
-:root[data-theme="light"] .text-gradient {
-  background: linear-gradient(
-    100deg,
-    var(--mint-ink) 0%,
-    var(--blue) 42%,
-    var(--violet-ink) 72%,
-    var(--mint-ink) 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* A gradient hairline that only exists on the edge of a panel.
-   Cheaper and crisper than a blurred pseudo-element glow. */
-.gradient-ring {
-  position: relative;
-}
-.gradient-ring::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--mint) 70%, transparent),
-    transparent 38%,
-    transparent 62%,
-    color-mix(in oklab, var(--violet) 60%, transparent)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+[data-reveal] {
   opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
-.gradient-ring:hover::before,
-.gradient-ring[data-active="true"]::before {
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Nothing should ever be permanently hidden because JS didn't run. */
+@media (scripting: none) {
+  [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ---------- theme toggle ------------------------------------ */
+
+.theme-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+:root[data-theme="dark"] .theme-icon-moon,
+:root[data-theme="light"] .theme-icon-sun {
+  opacity: 0;
+}
+:root[data-theme="dark"] .theme-icon-sun,
+:root[data-theme="light"] .theme-icon-moon {
   opacity: 1;
 }
 
-/* ---------- surfaces ----------------------------------------- */
+/* ---------- hero entrance -------------------------------------- */
 
-.card-soft {
-  box-shadow: var(--card-shadow);
+/* One keyframe, four delays. Runs once on load — the hero is above
+   the fold, so there is nothing to observe. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }
-
-/* Cards are lit from above rather than filled flat, which is what
-   lifts them off a background this dark. */
-.surface {
-  background-image: linear-gradient(
-    to bottom,
-    color-mix(in oklab, var(--foreground) 5%, transparent),
-    transparent 42%
-  );
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+.rise-1 { animation-delay: 0.07s; }
+.rise-2 { animation-delay: 0.14s; }
+.rise-3 { animation-delay: 0.21s; }
+.rise-4 { animation-delay: 0.3s; }
 
-.glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-line);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+/* ---------- pointer-reactive surfaces -------------------------- */
+
+.persp {
+  perspective: 1100px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
 }
 
 /* Pointer-tracked highlight. The x/y come from JS as percentages;
@@ -255,140 +175,22 @@ body {
   opacity: 1;
 }
 
-.flat-hover {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
-    transform 0.4s ease, box-shadow 0.4s ease;
-}
-.flat-hover:hover {
-  transform: translateY(-4px);
-}
-
-/* ---------- ambient background ------------------------------- */
-
-/* Aurora blobs. Each is a single blurred radial that only ever
-   translates/scales, so it never triggers layout or paint. */
-.aurora-blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: var(--aurora-alpha);
-  will-change: transform;
-  animation: aurora-drift 22s ease-in-out infinite alternate;
-}
-
-@keyframes aurora-drift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(6%, -8%, 0) scale(1.18);
-  }
-}
-
-/* On phones the wash stays but stops moving. Each blob is a large
-   composited layer, and a dozen of them drifting is real sustained GPU
-   work on hardware that has none to spare. */
-@media (max-width: 767px) {
-  .aurora-blob {
-    animation: none;
-    will-change: auto;
-  }
-}
-
-/* Fine grain over the whole page — hides banding in the gradients. */
-.grain::before {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  z-index: 1;
-  pointer-events: none;
-  opacity: var(--grain-alpha);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Perspective grid floor used at the foot of the hero. */
-.grid-floor {
-  background-image: linear-gradient(
-      to right,
-      color-mix(in oklab, var(--mint) 22%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--mint) 22%, transparent) 1px,
-      transparent 1px
-    );
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to top, #000, transparent 78%);
-  -webkit-mask-image: linear-gradient(to top, #000, transparent 78%);
-}
-
-/* ---------- 3D helpers --------------------------------------- */
-
-.persp {
-  perspective: 1100px;
-}
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
 /* ---------- misc --------------------------------------------- */
 
-/* theme toggle — the visible icon follows [data-theme], no JS state */
-.theme-icon {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-:root[data-theme="dark"] .theme-icon-moon,
-:root[data-theme="light"] .theme-icon-sun {
-  opacity: 0;
-  transform: rotate(60deg) scale(0.55);
-}
-:root[data-theme="dark"] .theme-icon-sun,
-:root[data-theme="light"] .theme-icon-moon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-/* carousel track — snap horizontally, hide the scrollbar chrome */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
 ::selection {
-  background: rgba(46, 230, 168, 0.28);
+  background: color-mix(in oklab, var(--mint) 30%, transparent);
   color: var(--foreground);
 }
 
-/* thin scrollbar */
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-track { background: var(--background); }
 ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
-
-/* Full-screen sections snap gently on desktop, where a section
-   comfortably fits the viewport. Left off on small screens and for
-   reduced-motion users, where mandatory snapping fights the user. */
-@media (min-width: 1024px) {
-  html {
-    scroll-snap-type: y proximity;
-  }
-  main > section {
-    scroll-snap-align: start;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; scroll-snap-type: none; }
-  .text-gradient,
-  .aurora-blob {
-    animation: none;
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
+  [data-reveal] { opacity: 1; transform: none; }
 }

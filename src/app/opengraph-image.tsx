@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             width: 520,
             height: 520,
             borderRadius: 520,
-            background: "#2ee6a8",
+            background: "#21c98f",
             opacity: 0.12,
             display: "flex",
           }}
@@ -51,8 +51,8 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", position: "relative", width: 64, height: 64 }}>
-            <div style={{ position: "absolute", left: 16, top: 0, width: 32, height: 32, borderRadius: 32, background: "#2ee6a8", display: "flex" }} />
-            <div style={{ position: "absolute", left: 0, top: 26, width: 32, height: 32, borderRadius: 32, background: "#2ee6a8", opacity: 0.55, display: "flex" }} />
+            <div style={{ position: "absolute", left: 16, top: 0, width: 32, height: 32, borderRadius: 32, background: "#21c98f", display: "flex" }} />
+            <div style={{ position: "absolute", left: 0, top: 26, width: 32, height: 32, borderRadius: 32, background: "#21c98f", opacity: 0.55, display: "flex" }} />
             <div style={{ position: "absolute", left: 32, top: 26, width: 32, height: 32, borderRadius: 32, background: "#2f8ef0", opacity: 0.7, display: "flex" }} />
           </div>
           <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: "#f2f5f4", letterSpacing: -0.5 }}>
